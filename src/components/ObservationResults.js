@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "0.5em",
     display: "flex",
     alignItems: "center",
+    "& > *": {
+      margin: "0.1em",
+    },
   },
   observationLocation: {
     fontSize: "0.8rem",
