@@ -133,7 +133,7 @@ const filterDetails = [
     filterName: "dateView",
     filterFriendlyName: "Date View",
     elementType: "dateView",
-    selected: dateViewLabelToValue("monthly"),
+    selected: dateViewLabelToValue("all time"),
   },
 ];
 
