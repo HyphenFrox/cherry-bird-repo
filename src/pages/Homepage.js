@@ -54,9 +54,9 @@ const useStyles = makeStyles((theme) => ({
     flexFlow: "column nowrap",
     alignItems: "center",
     "& > * + *": {
-      marginTop: "0.5em",
+      marginTop: "1em",
     },
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up(325)]: {
       flexFlow: "row wrap",
       alignItems: "initial",
       justifyContent: "center",

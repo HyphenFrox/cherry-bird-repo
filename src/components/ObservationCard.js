@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
     width: "100%",
     [theme.breakpoints.up(325)]: {
-      maxWidth: 325,
+      width: 325,
     },
   },
   observationCommonName: {
