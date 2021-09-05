@@ -8,9 +8,10 @@ import FilterSection from "../components/FilterSection";
 import fetchObservations from "../services/fetchObservations";
 import ProgressLoader from "../components/ProgressLoader";
 import findFilterIndexInArray from "../services/findFilterIndexInArray";
-import ObservationResults from "../components/ObservationResults";
-import DateAndPaginationFilter from "../components/DateAndPaginationFilter";
+import ObservationCard from "../components/ObservationCard";
 import { dateViewLabelToValue } from "../services/dateViewConversion";
+import DateFilter from "../components/DateFilter";
+import PaginationFilter from "../components/PaginationFilter";
 //
 
 const useStyles = makeStyles((theme) => ({
@@ -18,15 +19,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "1em 0",
     "& > * + *": {
       marginTop: "1em",
-    },
-  },
-  progressLoader: {
-    minHeight: 200,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    "& > *": {
-      marginLeft: "1em",
     },
   },
   heading: {
@@ -40,23 +32,37 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: "75%",
     },
   },
-  dateAndPaginationSection: {
+  resultsFilterSection: {
     display: "flex",
-    flexFlow: "row wrap",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    "& > *": {
+      margin: "0.5em",
+    },
+  },
+  progressLoader: {
+    minHeight: 200,
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
     "& > *": {
-      margin: "1em",
+      marginLeft: "1em",
     },
   },
   observationResults: {
     display: "flex",
     flexFlow: "column nowrap",
     alignItems: "center",
+    "& > * + *": {
+      marginTop: "0.5em",
+    },
     [theme.breakpoints.up("sm")]: {
       flexFlow: "row wrap",
       alignItems: "initial",
       justifyContent: "center",
+      "& > *": {
+        margin: "0.5em",
+      },
     },
   },
 }));
@@ -118,6 +124,7 @@ function Homepage() {
 
   return (
     <div className={classes.app}>
+      {/* Heading */}
       <Typography variant="h4" align="center" className={classes.heading}>
         {obsvStatus === "success"
           ? `${obsvData.total_results.toLocaleString()} `
@@ -134,50 +141,71 @@ function Homepage() {
           ? ` This Year`
           : null}
       </Typography>
+      {/*  */}
 
+      {/* main filter section */}
       <FilterSection
         className={classes.filterSection}
         filterState={filterState}
         setFilterState={setFilterState}
         filterDetails={filterDetails}
       ></FilterSection>
+      {/*  */}
 
+      {/* top results filter section */}
+      <div className={classes.resultsFilterSection}>
+        <DateFilter
+          dateViewValue={
+            filterState[findFilterIndexInArray(filterState, "dateView")]
+              .selected
+          }
+          handleDateViewValueChange={handleDateViewValueChange}
+        ></DateFilter>
+        <PaginationFilter
+          obsvStatus={obsvStatus}
+          obsvData={obsvData}
+          filterState={filterState}
+          handlePageChange={handlePageChange}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+        ></PaginationFilter>
+      </div>
+      {/*  */}
+
+      {/* observation results and progress loader */}
       {obsvStatus === "loading" ? (
         <ProgressLoader className={classes.progressLoader}>
           <Typography variant="h6">Loading Observations</Typography>
         </ProgressLoader>
       ) : obsvStatus === "success" ? (
-        <>
-          <DateAndPaginationFilter
-            className={classes.dateAndPaginationSection}
-            dateViewValue={
-              filterState[findFilterIndexInArray(filterState, "dateView")]
-                .selected
-            }
-            handleDateViewValueChange={handleDateViewValueChange}
-            filterState={filterState}
-            obsvData={obsvData}
-            handlePageChange={handlePageChange}
-            handleChangeRowsPerPage={handleChangeRowsPerPage}
-          ></DateAndPaginationFilter>
-          <ObservationResults
-            obsvData={obsvData}
-            className={classes.observationResults}
-          ></ObservationResults>
-          <DateAndPaginationFilter
-            className={classes.dateAndPaginationSection}
-            dateViewValue={
-              filterState[findFilterIndexInArray(filterState, "dateView")]
-                .selected
-            }
-            handleDateViewValueChange={handleDateViewValueChange}
-            filterState={filterState}
-            obsvData={obsvData}
-            handlePageChange={handlePageChange}
-            handleChangeRowsPerPage={handleChangeRowsPerPage}
-          ></DateAndPaginationFilter>
-        </>
+        <div className={classes.observationResults}>
+          {obsvData.results.map((observationData, index) => (
+            <ObservationCard
+              observationData={observationData}
+              key={index}
+            ></ObservationCard>
+          ))}
+        </div>
       ) : null}
+      {/*  */}
+
+      {/* bottom results filter section */}
+      <div className={classes.resultsFilterSection}>
+        <DateFilter
+          dateViewValue={
+            filterState[findFilterIndexInArray(filterState, "dateView")]
+              .selected
+          }
+          handleDateViewValueChange={handleDateViewValueChange}
+        ></DateFilter>
+        <PaginationFilter
+          obsvStatus={obsvStatus}
+          obsvData={obsvData}
+          filterState={filterState}
+          handlePageChange={handlePageChange}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+        ></PaginationFilter>
+      </div>
+      {/*  */}
     </div>
   );
 }
