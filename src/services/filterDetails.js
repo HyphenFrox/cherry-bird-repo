@@ -47,7 +47,7 @@ const filterDetails = [
     filterName: "order",
     filterFriendlyName: "Order",
     elementType: "select",
-    selected: "asc",
+    selected: "desc",
     options: ["Desc", "Asc"],
   },
   {
