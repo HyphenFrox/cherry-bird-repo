@@ -1,5 +1,6 @@
 import axios from "axios";
 import { dateViewLabelToValue } from "./dateViewConversion";
+import findFilterIndexInArray from "./findFilterIndexInArray";
 
 export default async function fetchObservations({ queryKey }) {
   const [, filterState] = queryKey;
@@ -52,6 +53,17 @@ export default async function fetchObservations({ queryKey }) {
       if (filter.selected === dateViewLabelToValue("yearly")) {
         url += `year=${currentDate.getFullYear()}&`;
       }
+    }
+
+    if (filter.elementType === "string" && filter.selected) {
+      url += `${filter.filterName}=${filter.selected}&`;
+    }
+
+    if (
+      filter.elementType === "nearbyRadius" &&
+      filterState[findFilterIndexInArray(filterState, "isNearbyOn")].selected
+    ) {
+      url += `radius=${filter.selected}&`;
     }
   }
 

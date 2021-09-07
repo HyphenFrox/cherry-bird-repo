@@ -1,4 +1,11 @@
-import { FormGroup, Paper, Typography } from "@material-ui/core";
+import {
+  FormGroup,
+  Paper,
+  Typography,
+  FormControlLabel,
+  Switch,
+  Slider,
+} from "@material-ui/core";
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { useQuery } from "react-query";
@@ -12,6 +19,7 @@ import findFilterIndexInArray from "../services/findFilterIndexInArray";
 const useStyles = makeStyles((theme) => ({
   title: {
     marginLeft: "0.5em",
+    textTransform: "uppercase",
   },
   formGroup: {
     "& > *": {
@@ -26,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
   },
   location: {
     minWidth: 200,
+  },
+  nearbyRadiusSlider: {
+    maxWidth: 200,
+    margin: "2em",
   },
 }));
 
@@ -70,6 +82,60 @@ function FilterSection({
   }
   //
 
+  //nearby
+  const handleIsNearbyOnChange = (event) => {
+    if (event.target.checked === false) {
+      setFilterState((state) => {
+        let newState = state;
+        newState[findFilterIndexInArray(newState, "lat")].selected = "";
+        newState[findFilterIndexInArray(newState, "lng")].selected = "";
+        newState[
+          findFilterIndexInArray(newState, "isNearbyOn")
+        ].selected = false;
+        return [...newState];
+      });
+    }
+
+    if (event.target.checked === true && "geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((geo) => {
+        setFilterState((state) => {
+          let newState = state;
+          newState[findFilterIndexInArray(newState, "lat")].selected =
+            geo.coords.latitude;
+          newState[findFilterIndexInArray(newState, "lng")].selected =
+            geo.coords.longitude;
+          newState[findFilterIndexInArray(newState, "location")].selected =
+            null;
+          newState[
+            findFilterIndexInArray(newState, "isNearbyOn")
+          ].selected = true;
+          return [...newState];
+        });
+      });
+    }
+  };
+
+  const handleNearbyRadiusChange = (...args) => {
+    const [, value] = args;
+    setFilterState((state) => {
+      let newState = state;
+      newState[findFilterIndexInArray(newState, "radius")].selected = value;
+      return [...newState];
+    });
+  };
+  const getNearbySliderValueLabel = (value) => `${value} KM`;
+  const nearbyRadiusSliderMarks = [
+    {
+      value: 0,
+      label: "0 KM",
+    },
+    {
+      value: 100,
+      label: "100 KM",
+    },
+  ];
+  //
+
   //location search results
   const {
     isLoading: isLocationOptionsLoading,
@@ -96,15 +162,19 @@ function FilterSection({
     });
   };
 
-  const handleMultiSelectFilterChange = (filterName) => (event, value) => {
-    setFilterState((state) => {
-      let newState = state;
-      newState[findFilterIndexInArray(newState, filterName)].selected = value;
-      return [...newState];
-    });
-  };
+  const handleMultiSelectFilterChange =
+    (filterName) =>
+    (...args) => {
+      const [, value] = args;
+      setFilterState((state) => {
+        let newState = state;
+        newState[findFilterIndexInArray(newState, filterName)].selected = value;
+        return [...newState];
+      });
+    };
 
-  const handleLocationFilterValueChange = (event, value) => {
+  const handleLocationFilterValueChange = (...args) => {
+    const [, value] = args;
     setFilterState((state) => {
       let newState = state;
       newState[findFilterIndexInArray(newState, "location")].selected = value;
@@ -141,7 +211,43 @@ function FilterSection({
           Filters
         </Typography>
         <FormGroup row className={classes.formGroup}>
-          <>{filterUI}</>
+          <>
+            {filterUI}
+            {"geolocation" in navigator ? (
+              <FormControlLabel
+                control={
+                  <Switch
+                    color="primary"
+                    checked={
+                      filterState[
+                        findFilterIndexInArray(filterState, "isNearbyOn")
+                      ].selected
+                    }
+                    onChange={handleIsNearbyOnChange}
+                    name="isNearbyOn"
+                  />
+                }
+                label="Observations Near You"
+              />
+            ) : null}
+            {filterState[findFilterIndexInArray(filterState, "isNearbyOn")]
+              .selected ? (
+              <Slider
+                name="nearbyRadiusSlider"
+                value={
+                  filterState[findFilterIndexInArray(filterState, "radius")]
+                    .selected
+                }
+                getAriaValueText={getNearbySliderValueLabel}
+                onChange={handleNearbyRadiusChange}
+                valueLabelDisplay="auto"
+                min={1}
+                max={100}
+                marks={nearbyRadiusSliderMarks}
+                className={classes.nearbyRadiusSlider}
+              ></Slider>
+            ) : null}
+          </>
         </FormGroup>
       </Paper>
     </>

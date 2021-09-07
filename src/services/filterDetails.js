@@ -135,6 +135,29 @@ const filterDetails = [
     elementType: "dateView",
     selected: dateViewLabelToValue("all time"),
   },
+  {
+    filterName: "isNearbyOn",
+    elementType: "nearby",
+    selected: false,
+  },
+  {
+    filterName: "lat",
+    filterFriendlyName: "Latitude",
+    elementType: "string",
+    selected: "",
+  },
+  {
+    filterName: "lng",
+    filterFriendlyName: "Longitude",
+    elementType: "string",
+    selected: "",
+  },
+  {
+    filterName: "radius",
+    filterFriendlyName: "Radius",
+    elementType: "nearbyRadius",
+    selected: 25,
+  },
 ];
 
 export { filterDetails };

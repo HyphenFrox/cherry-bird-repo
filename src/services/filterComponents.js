@@ -7,12 +7,12 @@ import {
   MenuItem,
   Select,
   TextField,
+  CircularProgress,
 } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Checkbox from "@material-ui/core/Checkbox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 //
 import findFilterIndexInArray from "./findFilterIndexInArray";
@@ -109,6 +109,10 @@ export default function createFilterComponents({
     return (
       <Autocomplete
         className={locationClass}
+        disabled={
+          filterState[findFilterIndexInArray(filterState, "isNearbyOn")]
+            .selected
+        }
         getOptionSelected={(option, value) => option.name === value.name}
         getOptionLabel={(option) => option.name}
         loading={isLocationOptionsLoading}
@@ -139,4 +143,6 @@ export default function createFilterComponents({
       />
     );
   }
+
+  return null;
 }
