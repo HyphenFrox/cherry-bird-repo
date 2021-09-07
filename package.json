@@ -2,7 +2,7 @@
   "name": "cherry-bird-repo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hyphenfrox.github.io/cherry-bird-repo/",
+  "homepage": "https://cherrybird.netlify.app/",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
@@ -13,13 +13,9 @@
     "react-query": "^3.21.1",
     "react-scripts": "4.0.3"
   },
-  "devDependencies": {
-    "gh-pages": "^3.2.3"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
