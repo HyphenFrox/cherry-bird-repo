@@ -140,6 +140,9 @@ function Homepage() {
               .selected === dateViewLabelToValue("yearly")
           ? ` This Year`
           : null}
+        {filterState[findFilterIndexInArray(filterState, "isNearbyOn")].selected
+          ? " Around You"
+          : null}
       </Typography>
       {/*  */}
 
