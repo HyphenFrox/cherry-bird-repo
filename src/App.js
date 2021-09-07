@@ -16,7 +16,10 @@ function App() {
     <>
       <Theme>
         <QueryClientProvider client={MyQueryClient}>
-          <Homepage></Homepage>
+          <>
+            <Homepage></Homepage>
+            {/* <Test></Test> */}
+          </>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </Theme>
