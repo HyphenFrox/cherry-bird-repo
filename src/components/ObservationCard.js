@@ -175,20 +175,20 @@ function ObservationCard(props) {
               {observationData?.user?.name ?? "Unknown Observer"}
             </Typography>
           </div>
-          <div className={classes.createdAtTimeBox}>
-            <CreateIcon></CreateIcon>
-            <Typography variant="subtitle1" className={classes.createdAtTime}>
-              {observationData?.created_at
-                ? created_at.toLocaleString()
-                : "Creation Date Unknown"}
-            </Typography>
-          </div>
           <div className={classes.observedOnTimeBox}>
             <VisibilityIcon></VisibilityIcon>
             <Typography variant="subtitle1" className={classes.observedOnTime}>
               {observationData?.time_observed_at
                 ? time_observed_at.toLocaleString()
                 : "Observation Date Unknown"}
+            </Typography>
+          </div>
+          <div className={classes.createdAtTimeBox}>
+            <CreateIcon></CreateIcon>
+            <Typography variant="subtitle1" className={classes.createdAtTime}>
+              {observationData?.created_at
+                ? created_at.toLocaleString()
+                : "Creation Date Unknown"}
             </Typography>
           </div>
         </div>
