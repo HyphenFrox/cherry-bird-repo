@@ -69,8 +69,6 @@ export default async function fetchObservations({ queryKey }) {
 
   url = encodeURI(url);
 
-  if (process.env.NODE_ENV === "development") console.log(url);
-
   const { data: observationResults } = await axios.get(url);
 
   return observationResults;
