@@ -59,8 +59,10 @@ const useStyles = makeStyles((theme) => ({
       flexFlow: "row wrap",
       alignItems: "initial",
       justifyContent: "center",
+      paddingLeft: "5%",
+      paddingRight: "5%",
       "& > *": {
-        margin: "0.5em",
+        margin: "0.8em",
       },
     },
   },
