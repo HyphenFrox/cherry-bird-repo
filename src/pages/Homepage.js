@@ -1,4 +1,4 @@
-import { makeStyles, Typography } from "@material-ui/core";
+import { CircularProgress, makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 
@@ -6,7 +6,6 @@ import { useQuery } from "react-query";
 import { filterDetails } from "../services/filterDetails";
 import FilterSection from "../components/FilterSection";
 import fetchObservations from "../services/fetchObservations";
-import ProgressLoader from "../components/ProgressLoader";
 import findFilterIndexInArray from "../services/findFilterIndexInArray";
 import ObservationCard from "../components/ObservationCard";
 import { dateViewLabelToValue } from "../services/dateViewConversion";
@@ -40,12 +39,12 @@ const useStyles = makeStyles((theme) => ({
       margin: "0.5em",
     },
   },
-  progressLoader: {
+  progressLoaderSection: {
     minHeight: 200,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    "& > *": {
+    "& > * + *": {
       marginLeft: "1em",
     },
   },
@@ -176,9 +175,10 @@ function Homepage() {
 
       {/* observation results and progress loader */}
       {obsvStatus === "loading" ? (
-        <ProgressLoader className={classes.progressLoader}>
+        <div className={classes.progressLoaderSection}>
+          <CircularProgress></CircularProgress>
           <Typography variant="h6">Loading Observations</Typography>
-        </ProgressLoader>
+        </div>
       ) : obsvStatus === "success" ? (
         <div className={classes.observationResults}>
           {obsvData.results.map((observationData, index) => (
