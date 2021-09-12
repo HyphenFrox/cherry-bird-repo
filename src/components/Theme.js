@@ -1,6 +1,6 @@
 import React from "react";
 import { CssBaseline, createTheme } from "@material-ui/core";
-import { green } from "@material-ui/core/colors";
+import { green, lightBlue } from "@material-ui/core/colors";
 import { ThemeProvider } from "@material-ui/styles";
 
 function Theme({ children }) {
@@ -11,7 +11,7 @@ function Theme({ children }) {
         main: green["A700"],
       },
       secondary: {
-        main: "#ccffd2",
+        main: lightBlue["A700"],
       },
     },
     typography: {

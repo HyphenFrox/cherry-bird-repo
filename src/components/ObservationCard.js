@@ -1,21 +1,33 @@
 import React from "react";
-import { Card, CardContent, makeStyles, Typography } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardContent,
+  makeStyles,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import CreateIcon from "@material-ui/icons/Create";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import PersonIcon from "@material-ui/icons/Person";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  observationCard: {
-    backgroundColor: theme.palette.secondary.main,
+  observationCard: (props) => ({
     width: "100%",
+    backgroundColor: "hsla(144, 100%, 50%, 0.3)",
+    cursor: "pointer",
+    boxShadow: theme.shadows[4],
+    [theme.breakpoints.up(props.maxMobileWidth + 1)]: {
+      "&:hover": {
+        boxShadow: theme.shadows[10],
+      },
+    },
     "& > *": {
       marginTop: "0.5em",
     },
-    [theme.breakpoints.up(300)]: {
-      width: 300,
-    },
-  },
+  }),
   observationCommonName: {
     marginTop: "1em",
   },
@@ -79,13 +91,28 @@ const useStyles = makeStyles((theme) => ({
   observedOnTime: {
     fontSize: "1rem",
   },
+  moreDetailsButton: {
+    marginLeft: "auto",
+    marginTop: "auto",
+    [theme.breakpoints.up("sm")]: {
+      marginTop: "initial",
+      marginRight: "auto",
+    },
+  },
 }));
 
 function ObservationCard(props) {
-  const { observationData, ...args } = props;
+  const { observationData, maxMobileWidth, ...args } = props;
 
   const created_at = new Date(observationData?.created_at);
   const time_observed_at = new Date(observationData?.time_observed_at);
+
+  //for more details button
+  const isMobile = useMediaQuery(`(max-width:${maxMobileWidth - 1}px)`);
+  const history = useHistory();
+  const handleCardClick = (observationID) => () =>
+    history.push(`/observation/${observationID}`);
+  //
 
   //observation photo styles
   const observationPhotoStyles = (url) => {
@@ -124,10 +151,14 @@ function ObservationCard(props) {
   };
   //
 
-  const classes = useStyles();
+  const classes = useStyles({ maxMobileWidth });
 
   return (
-    <Card className={classes.observationCard} {...args}>
+    <Card
+      className={classes.observationCard}
+      onClick={handleCardClick(observationData.id)}
+      {...args}
+    >
       <CardContent>
         <div
           style={observationPhotoStyles(
@@ -191,6 +222,14 @@ function ObservationCard(props) {
                 : "Creation Date Unknown"}
             </Typography>
           </div>
+          {isMobile ? (
+            <Button
+              href={`/observations/${observationData.id}`}
+              className={classes.moreDetailsButton}
+            >
+              More Details
+            </Button>
+          ) : null}
         </div>
       </CardContent>
     </Card>

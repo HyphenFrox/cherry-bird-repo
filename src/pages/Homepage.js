@@ -13,6 +13,8 @@ import DateFilter from "../components/DateFilter";
 import PaginationFilter from "../components/PaginationFilter";
 //
 
+const observationCardMaxMobileWidth = 300;
+
 const useStyles = makeStyles((theme) => ({
   app: {
     padding: "1em 0",
@@ -52,16 +54,21 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexFlow: "column nowrap",
     alignItems: "center",
+    "& > *": {
+      width: "100%",
+      alignSelf: "flex-start",
+    },
     "& > * + *": {
       marginTop: "1em",
     },
-    [theme.breakpoints.up(325)]: {
+    [theme.breakpoints.up(observationCardMaxMobileWidth + 1)]: {
+      paddingLeft: "5%",
+      paddingRight: "5%",
       flexFlow: "row wrap",
       alignItems: "initial",
       justifyContent: "center",
-      paddingLeft: "5%",
-      paddingRight: "5%",
       "& > *": {
+        width: `${observationCardMaxMobileWidth}px`,
         margin: "0.8em",
       },
     },
@@ -186,6 +193,7 @@ function Homepage() {
           {obsvData.results.map((observationData, index) => (
             <ObservationCard
               observationData={observationData}
+              maxMobileWidth={observationCardMaxMobileWidth}
               key={index}
             ></ObservationCard>
           ))}
