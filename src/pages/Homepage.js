@@ -149,7 +149,7 @@ function Homepage() {
       <Typography
         variant="h4"
         align="center"
-        style={{ textTransform: "uppercase" }}
+        style={{ margin: "0.5em", textTransform: "uppercase" }}
       >
         {obsvStatus === "success"
           ? `${obsvData.total_results.toLocaleString()} `
