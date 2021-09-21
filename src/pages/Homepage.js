@@ -1,5 +1,5 @@
-import { makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
+import { makeStyles, Typography } from "@material-ui/core";
 import { useQuery } from "react-query";
 
 //
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   app: {
     minHeight: "100%",
     padding: "1em 0",
-    "& > *": {
+    "& > * + *": {
       margin: "1em",
     },
   },
