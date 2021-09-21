@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     display: "grid",
     gridTemplateColumns: "100%",
     justifyItems: "center",
-    "& > *:first-child": {
+    "& > *": {
       [theme.breakpoints.up("sm")]: {
         maxWidth: "75%",
       },
