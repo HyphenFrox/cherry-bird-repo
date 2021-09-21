@@ -2,6 +2,7 @@ import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { CssBaseline } from "@material-ui/core";
 
 //
 import "./styles.css";
@@ -29,6 +30,7 @@ function App() {
           </Router>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
+        <CssBaseline></CssBaseline>
       </Theme>
     </>
   );
