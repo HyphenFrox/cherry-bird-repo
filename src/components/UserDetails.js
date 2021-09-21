@@ -10,16 +10,22 @@ import UserIcon from "./UserIcon";
 //
 
 const useStyles = makeStyles({
-  userHeader: {
-    width: "100%",
-    display: "grid",
-    gridTemplateColumns: "30% 70%",
-    "& > * + *": {
-      marginLeft: "1em",
+  userDetailsColumn: {
+    padding: "1em",
+    display: "flex",
+    flexDirection: "column",
+    gap: "1em",
+    "& > *": {
+      borderBottom: "3px solid lightgrey",
     },
   },
+  userHeader: {
+    padding: "0.5em",
+    display: "grid",
+    gridTemplateColumns: "30% 70%",
+    gap: "1em",
+  },
   userNameBox: {
-    width: "100%",
     display: "grid",
     gridTemplateColumns: "100%",
     alignContent: "center",
@@ -27,22 +33,12 @@ const useStyles = makeStyles({
   flexBox: {
     display: "flex",
     flexWrap: "wrap",
-    "& > *": {
-      padding: "0.5em",
-    },
+    gap: "1em",
   },
   twoBox: {
     display: "flex",
     alignItems: "center",
-    "& > *:first-child": {
-      flexShrink: 0,
-    },
-    "& > *:nth-child(2)": {
-      flexGrow: 1,
-    },
-    "& > * + *": {
-      marginLeft: "0.5em",
-    },
+    gap: "1em",
   },
 });
 
@@ -50,7 +46,7 @@ function UserDetails(props) {
   const { userDetails, ...args } = props;
   const classes = useStyles();
   return (
-    <div {...args}>
+    <div className={classes.userDetailsColumn} {...args}>
       <div className={classes.userHeader}>
         <UserIcon userIconURL={userDetails?.icon_url ?? false}></UserIcon>
         <div className={classes.userNameBox}>

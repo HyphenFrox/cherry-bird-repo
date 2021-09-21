@@ -16,12 +16,17 @@ import LinkIcon from "@material-ui/icons/Link";
 import GoogleMapReact from "google-map-react";
 import { sanitize } from "dompurify";
 import HTMLReactParser from "html-react-parser";
+import classNames from "classnames";
+
+//
+import useResponsiveSquare from "../services/useResponsiveSquare";
+//
 
 const useStyles = makeStyles({
-  root: {
-    "& > *": {
-      marginTop: "1em",
-    },
+  obsvDetails: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "1em",
   },
   flexBox: {
     display: "flex",
@@ -47,18 +52,14 @@ const useStyles = makeStyles({
     fontSize: "2rem",
   },
   mapBox: {
-    width: "100%",
-    position: "relative",
     "&:after": {
-      content: "''",
-      display: "block",
       paddingBottom: "50%",
     },
   },
   map: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
+    // position: "absolute",
+    // width: "100%",
+    // height: "100%",
   },
 });
 
@@ -69,8 +70,9 @@ function ObservationDetails(props) {
   const isGeo = observation.hasOwnProperty("geojson");
 
   const classes = useStyles();
+  const responsiveSquare = useResponsiveSquare();
   return (
-    <div className={classes.root} {...args}>
+    <div className={classes.obsvDetails} {...args}>
       <div className={classes.flexBox}>
         <div className={classes.twoBox}>
           <VisibilityIcon color="primary"></VisibilityIcon>
@@ -195,8 +197,8 @@ function ObservationDetails(props) {
           <Typography variant="h2" gutterBottom style={{ fontSize: "2rem" }}>
             Observation Location
           </Typography>
-          <div className={classes.mapBox}>
-            <div className={classes.map}>
+          <div className={classNames(responsiveSquare.square, classes.mapBox)}>
+            <div className={classNames(responsiveSquare.content, classes.map)}>
               <GoogleMapReact
                 bootstrapURLKeys={{
                   key: process.env.REACT_APP_googleMapsAPIKey,

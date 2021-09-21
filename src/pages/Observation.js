@@ -1,9 +1,9 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { Typography, makeStyles } from "@material-ui/core";
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
 import Carousel from "react-material-ui-carousel";
+import classNames from "classnames";
 
 //
 import ProgressLoader from "../components/ProgressLoader";
@@ -11,20 +11,17 @@ import fetchObservation from "../services/fetchObservation";
 import ObservationDetails from "../components/ObservationDetails";
 import UserDetails from "../components/UserDetails";
 import AppHeader from "../components/AppHeader";
+import useResponsiveSquare from "../services/useResponsiveSquare";
 //
 
 const useStyles = makeStyles((theme) => ({
   page: {
-    width: "100%",
-    height: "100%",
-    paddingTop: "1em",
-    paddingBottom: "1em",
-    "& > * + *": {
-      marginTop: "1em",
-    },
-    [theme.breakpoints.up("sm")]: {
-      paddingLeft: "1em",
-      paddingRight: "1em",
+    minHeight: "100%",
+  },
+  content: {
+    padding: "1em 0",
+    "& > *": {
+      margin: "1em",
     },
   },
   commonName: {
@@ -40,60 +37,28 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: "italic",
     color: "hsla(0, 70%, 0%, 0.6)",
   },
-  obsvDetailsBox: {
+  obsvDetailsGridBox: {
     display: "grid",
     gridTemplateColumns: "70% 30%",
+    gap: "0.5em",
     "@media screen and (max-aspect-ratio: 1/1)": {
       gridTemplateColumns: "100%",
     },
-    "& > *:first-child": {
-      padding: "0.5em",
-    },
   },
-  obsvDetailsSection: {
-    width: "100%",
-    height: "100%",
+  obsvDetailsColumn: {
     display: "flex",
     flexFlow: "column nowrap",
-    justifyContent: "center",
-  },
-  noPhotos: {
-    width: "100%",
-    height: "100%",
-    display: "grid",
-    gridTemplateColumns: "100%",
-    alignContent: "center",
+    gap: "0.5em",
   },
   obsvPhoto: {
-    position: "relative",
-    width: "100%",
     "&:after": {
-      content: "''",
-      display: "block",
       paddingBottom: "50%",
       "@media screen and (max-aspect-ratio: 1/1)": {
         paddingBottom: "100%",
       },
     },
   },
-  noPhoto: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    display: "grid",
-    gridTemplateColumns: "100%",
-    alignContent: "center",
-  },
-  userDetailsSection: {
-    "& > *": {
-      padding: "1em",
-      borderBottom: "3px solid lightGray",
-      "&:first-child": {
-        borderTop: "3px solid lightGray",
-      },
-    },
-  },
-  progressLoaderSection: {
+  progressLoader: {
     minHeight: "100%",
     display: "flex",
     justifyContent: "center",
@@ -125,10 +90,11 @@ function Test() {
         backgroundSize: "cover",
       };
     }
-    return {};
+    return null;
   };
 
   const classes = useStyles();
+  const responsiveSquare = useResponsiveSquare();
 
   if (obsvStatus === "success") {
     const observation = obsvData.results[0];
@@ -137,9 +103,14 @@ function Test() {
       observation.observation_photos.length > 0;
 
     return (
-      <div className={classes.root}>
+      <div className={classes.page}>
+        {/* header */}
         <AppHeader></AppHeader>
-        <div className={classes.page}>
+        {/*  */}
+
+        {/* content */}
+        <div className={classes.content}>
+          {/* heading */}
           <Typography className={classes.commonName} variant="h1">
             {observation?.species_guess ?? "Common Name N/A"}{" "}
             <span className={classes.speciesName}>
@@ -148,23 +119,26 @@ function Test() {
               })`}
             </span>
           </Typography>
+          {/*  */}
 
-          <div className={classes.obsvDetailsBox}>
-            <div className={classes.obsvDetailsSection}>
+          {/* observation details grid */}
+          <div className={classes.obsvDetailsGridBox}>
+            <div className={classes.obsvDetailsColumn}>
               {obsvHasPhotos ? (
                 <Carousel autoPlay={false}>
                   {observation.observation_photos.map((photo_object, index) => {
                     return (
                       <div
-                        className={classes.obsvPhoto}
-                        style={photoDivStyles(
-                          photo_object?.photo?.url ?? false
+                        className={classNames(
+                          responsiveSquare.square,
+                          classes.obsvPhoto
                         )}
+                        style={photoDivStyles(photo_object?.photo?.url)}
                         key={index}
                       >
                         {photo_object?.photo?.url ? null : (
-                          <div className={classes.noPhoto}>
-                            <Typography align="center">
+                          <div className={responsiveSquare.content}>
+                            <Typography variant="subtitle2" align="center">
                               Photo Unavaliable
                             </Typography>
                           </div>
@@ -174,23 +148,25 @@ function Test() {
                   })}
                 </Carousel>
               ) : (
-                <div className={classes.noPhotos}>
-                  <Typography align="center">
-                    No Observation Photos Found
-                  </Typography>
-                </div>
+                <Typography
+                  variant="h5"
+                  align="center"
+                  style={{ fontSize: "1rem" }}
+                >
+                  No Observation Photos Found
+                </Typography>
               )}
               <ObservationDetails
                 observation={observation}
               ></ObservationDetails>
             </div>
-            <UserDetails
-              userDetails={observation.user}
-              className={classes.userDetailsSection}
-            ></UserDetails>
+            <UserDetails userDetails={observation.user}></UserDetails>
           </div>
+          {/*  */}
+
+          {/* attributions */}
           {obsvHasPhotos ? (
-            <div style={{ padding: "0.5em" }}>
+            <div>
               <Typography
                 variant="h2"
                 gutterBottom
@@ -206,14 +182,16 @@ function Test() {
               </Typography>
             </div>
           ) : null}
+          {/*  */}
         </div>
+        {/*  */}
       </div>
     );
   }
 
   if (obsvStatus === "loading") {
     return (
-      <div className={classes.progressLoaderSection}>
+      <div className={classes.progressLoader}>
         <ProgressLoader>
           <Typography variant="h5" style={{ fontSize: "1.5rem" }}>
             Loading Observation Data
