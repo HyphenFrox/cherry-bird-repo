@@ -46,25 +46,24 @@ const useStyles = makeStyles((theme) => ({
     justifyItems: "center",
   },
   observationResults: {
+    margin: 0,
     display: "flex",
     flexFlow: "column nowrap",
+    gap: "1.5em",
     alignItems: "center",
     "& > *": {
       width: "100%",
       alignSelf: "flex-start",
     },
-    "& > * + *": {
-      marginTop: "1em",
-    },
     [theme.breakpoints.up(observationCardMaxMobileWidth + 1)]: {
+      margin: "inherit",
+      flexFlow: "row wrap",
       paddingLeft: "5%",
       paddingRight: "5%",
-      flexFlow: "row wrap",
       alignItems: "initial",
       justifyContent: "center",
       "& > *": {
         width: `${observationCardMaxMobileWidth}px`,
-        margin: "0.8em",
       },
     },
   },
