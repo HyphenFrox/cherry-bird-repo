@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { makeStyles, Typography } from "@material-ui/core";
+import { makeStyles, Typography, Link } from "@material-ui/core";
+import { GitHub } from "@material-ui/icons";
 import { useQuery } from "react-query";
 
 //
@@ -23,6 +24,13 @@ const useStyles = makeStyles((theme) => ({
     "& > * + *": {
       margin: "1em",
     },
+  },
+  header: {
+    height: "50px",
+    padding: "1em",
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
   filterSection: {
     display: "grid",
@@ -126,6 +134,17 @@ function Homepage() {
 
   return (
     <div className={classes.app}>
+      {/* header */}
+      <div className={classes.header}>
+        <Link
+          href="https://github.com/HyphenFrox/cherry-bird-repo"
+          target="_blank"
+        >
+          <GitHub fontSize="large"></GitHub>
+        </Link>
+      </div>
+      {/*  */}
+
       {/* Heading */}
       <Typography
         variant="h4"
