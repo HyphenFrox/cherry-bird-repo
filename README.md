@@ -4,7 +4,7 @@ Cherry Bird Repo is a wildlife observation repository that displays all the wild
 
 # Fetures of the app:
 
-- filter features let you filter by Taxonomy, Rank, Location, Threatened, etc.
+- Filter features let you filter by Taxonomy, Rank, Location, Threatened, etc.
 - Nearby feature lets you find observations made around you.
 - A detailed observation page.
 
