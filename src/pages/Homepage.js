@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 
 //
 import { filterDetails } from "../services/filterDetails";
-import FilterSection from "../components/FilterSection";
+import Filters from "../components/Filters";
 import fetchObservations from "../services/fetchObservations";
 import findFilterIndexInArray from "../services/findFilterIndexInArray";
 import ObservationCard from "../components/ObservationCard";
@@ -19,28 +19,25 @@ const useStyles = makeStyles((theme) => ({
   app: {
     minHeight: "100%",
     padding: "1em 0",
-    "& > * + *": {
-      marginTop: "1em",
+    "& > *": {
+      margin: "0.8em",
     },
-  },
-  heading: {
-    textTransform: "uppercase",
   },
   filterSection: {
-    maxWidth: "90%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "75%",
+    display: "grid",
+    gridTemplateColumns: "100%",
+    justifyItems: "center",
+    "& > *:first-child": {
+      [theme.breakpoints.up("sm")]: {
+        maxWidth: "75%",
+      },
     },
   },
-  resultsFilterSection: {
+  dateAndPaginationSection: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    "& > *": {
-      margin: "0.5em",
-    },
+    gap: "1em",
   },
   progressLoaderSection: {
     minHeight: 200,
@@ -134,7 +131,11 @@ function Homepage() {
   return (
     <div className={classes.app}>
       {/* Heading */}
-      <Typography variant="h4" align="center" className={classes.heading}>
+      <Typography
+        variant="h4"
+        align="center"
+        style={{ textTransform: "uppercase" }}
+      >
         {obsvStatus === "success"
           ? `${obsvData.total_results.toLocaleString()} `
           : null}
@@ -156,16 +157,17 @@ function Homepage() {
       {/*  */}
 
       {/* main filter section */}
-      <FilterSection
-        className={classes.filterSection}
-        filterState={filterState}
-        setFilterState={setFilterState}
-        filterDetails={filterDetails}
-      ></FilterSection>
+      <div className={classes.filterSection}>
+        <Filters
+          filterState={filterState}
+          setFilterState={setFilterState}
+          filterDetails={filterDetails}
+        ></Filters>
+      </div>
       {/*  */}
 
       {/* top results filter section */}
-      <div className={classes.resultsFilterSection}>
+      <div className={classes.dateAndPaginationSection}>
         <DateFilter
           dateViewValue={
             filterState[findFilterIndexInArray(filterState, "dateView")]
@@ -203,7 +205,7 @@ function Homepage() {
       {/*  */}
 
       {/* bottom results filter section */}
-      <div className={classes.resultsFilterSection}>
+      <div className={classes.dateAndPaginationSection}>
         <DateFilter
           dateViewValue={
             filterState[findFilterIndexInArray(filterState, "dateView")]

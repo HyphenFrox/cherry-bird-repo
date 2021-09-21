@@ -17,10 +17,6 @@ import findFilterIndexInArray from "../services/findFilterIndexInArray";
 //
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    marginLeft: "0.5em",
-    textTransform: "uppercase",
-  },
   formGroup: {
     "& > *": {
       margin: theme.spacing(1),
@@ -207,7 +203,13 @@ function FilterSection({
   return (
     <>
       <Paper {...args}>
-        <Typography variant="h5" className={classes.title}>
+        <Typography
+          variant="h6"
+          style={{
+            marginLeft: "0.5em",
+            textTransform: "uppercase",
+          }}
+        >
           Filters
         </Typography>
         <FormGroup row className={classes.formGroup}>
