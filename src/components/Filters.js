@@ -18,9 +18,8 @@ import findFilterIndexInArray from "../services/findFilterIndexInArray";
 
 const useStyles = makeStyles((theme) => ({
   formGroup: {
-    "& > *": {
-      margin: theme.spacing(1),
-    },
+    padding: "1em",
+    gap: "1em",
   },
   select: {
     minWidth: 120,
