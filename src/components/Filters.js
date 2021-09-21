@@ -37,12 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function FilterSection({
-  filterDetails,
-  filterState,
-  setFilterState,
-  ...args
-}) {
+function Filters({ filterDetails, filterState, setFilterState, ...args }) {
   const classes = useStyles();
 
   //filter input states
@@ -256,4 +251,4 @@ function FilterSection({
   );
 }
 
-export default FilterSection;
+export default Filters;
