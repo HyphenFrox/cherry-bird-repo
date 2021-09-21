@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 function AppHeader() {
   const classes = useStyles();
   return (
-    <AppBar position="static" color="secondary">
+    <AppBar position="static" color="primary">
       <Toolbar>
         <Link
           variant="h1"
@@ -27,7 +27,7 @@ function AppHeader() {
           href="https://github.com/HyphenFrox/cherry-bird-repo"
           target="_blank"
         >
-          <GitHub style={{ color: "white" }}></GitHub>
+          <GitHub style={{ color: "white" }} fontSize="large"></GitHub>
         </Link>
       </Toolbar>
     </AppBar>
