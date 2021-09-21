@@ -18,16 +18,18 @@ import PaginationFilter from "../components/PaginationFilter";
 const observationCardMaxMobileWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
-  app: {
+  page: {
     minHeight: "100%",
-    padding: "1em 0",
-    "& > * + *": {
+  },
+  content: {
+    padding: "1em",
+    "& > *": {
       margin: "1em",
     },
   },
   header: {
     height: "50px",
-    padding: "1em",
+    padding: "2em",
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
@@ -133,7 +135,7 @@ function Homepage() {
   const classes = useStyles();
 
   return (
-    <div className={classes.app}>
+    <div className={classes.page}>
       {/* header */}
       <div className={classes.header}>
         <Link
@@ -145,103 +147,106 @@ function Homepage() {
       </div>
       {/*  */}
 
-      {/* Heading */}
-      <Typography
-        variant="h4"
-        align="center"
-        style={{ margin: "0.5em", textTransform: "uppercase" }}
-      >
-        {obsvStatus === "success"
-          ? `${obsvData.total_results.toLocaleString()} `
-          : null}
-        WildLife Oservations
-        {filterState[findFilterIndexInArray(filterState, "dateView")]
-          .selected === dateViewLabelToValue("daily")
-          ? ` Today`
-          : filterState[findFilterIndexInArray(filterState, "dateView")]
-              .selected === dateViewLabelToValue("monthly")
-          ? ` This Month`
-          : filterState[findFilterIndexInArray(filterState, "dateView")]
-              .selected === dateViewLabelToValue("yearly")
-          ? ` This Year`
-          : null}
-        {filterState[findFilterIndexInArray(filterState, "isNearbyOn")].selected
-          ? " Around You"
-          : null}
-      </Typography>
-      {/*  */}
+      <div className={classes.content}>
+        {/* Heading */}
+        <Typography
+          variant="h4"
+          align="center"
+          style={{ margin: "0.5em", textTransform: "uppercase" }}
+        >
+          {obsvStatus === "success"
+            ? `${obsvData.total_results.toLocaleString()} `
+            : null}
+          WildLife Oservations
+          {filterState[findFilterIndexInArray(filterState, "dateView")]
+            .selected === dateViewLabelToValue("daily")
+            ? ` Today`
+            : filterState[findFilterIndexInArray(filterState, "dateView")]
+                .selected === dateViewLabelToValue("monthly")
+            ? ` This Month`
+            : filterState[findFilterIndexInArray(filterState, "dateView")]
+                .selected === dateViewLabelToValue("yearly")
+            ? ` This Year`
+            : null}
+          {filterState[findFilterIndexInArray(filterState, "isNearbyOn")]
+            .selected
+            ? " Around You"
+            : null}
+        </Typography>
+        {/*  */}
 
-      {/* main filter section */}
-      <div className={classes.filterSection}>
-        <Filters
-          filterState={filterState}
-          setFilterState={setFilterState}
-          filterDetails={filterDetails}
-        ></Filters>
-      </div>
-      {/*  */}
-
-      {/* top results filter section */}
-      <div className={classes.dateAndPaginationSection}>
-        <DateFilter
-          dateViewValue={
-            filterState[findFilterIndexInArray(filterState, "dateView")]
-              .selected
-          }
-          handleDateViewValueChange={handleDateViewValueChange}
-        ></DateFilter>
-        <PaginationFilter
-          obsvStatus={obsvStatus}
-          obsvData={obsvData}
-          filterState={filterState}
-          handlePageChange={handlePageChange}
-          handleChangeRowsPerPage={handleChangeRowsPerPage}
-        ></PaginationFilter>
-      </div>
-      {/*  */}
-
-      {/* observation results and progress loader */}
-      {obsvStatus === "loading" ? (
-        <div className={classes.progressLoaderSection}>
-          <ProgressLoader>
-            <Typography variant="h5" style={{ fontSize: "1.3rem" }}>
-              Loading Observations
-            </Typography>
-          </ProgressLoader>
+        {/* main filter section */}
+        <div className={classes.filterSection}>
+          <Filters
+            filterState={filterState}
+            setFilterState={setFilterState}
+            filterDetails={filterDetails}
+          ></Filters>
         </div>
-      ) : obsvStatus === "success" ? (
-        <>
-          <div className={classes.observationResults}>
-            {obsvData.results.map((observationData, index) => (
-              <ObservationCard
-                observationData={observationData}
-                maxMobileWidth={observationCardMaxMobileWidth}
-                key={index}
-              ></ObservationCard>
-            ))}
-          </div>
+        {/*  */}
 
-          {/* bottom results filter section */}
-          <div className={classes.dateAndPaginationSection}>
-            <DateFilter
-              dateViewValue={
-                filterState[findFilterIndexInArray(filterState, "dateView")]
-                  .selected
-              }
-              handleDateViewValueChange={handleDateViewValueChange}
-            ></DateFilter>
-            <PaginationFilter
-              obsvStatus={obsvStatus}
-              obsvData={obsvData}
-              filterState={filterState}
-              handlePageChange={handlePageChange}
-              handleChangeRowsPerPage={handleChangeRowsPerPage}
-            ></PaginationFilter>
+        {/* top results filter section */}
+        <div className={classes.dateAndPaginationSection}>
+          <DateFilter
+            dateViewValue={
+              filterState[findFilterIndexInArray(filterState, "dateView")]
+                .selected
+            }
+            handleDateViewValueChange={handleDateViewValueChange}
+          ></DateFilter>
+          <PaginationFilter
+            obsvStatus={obsvStatus}
+            obsvData={obsvData}
+            filterState={filterState}
+            handlePageChange={handlePageChange}
+            handleChangeRowsPerPage={handleChangeRowsPerPage}
+          ></PaginationFilter>
+        </div>
+        {/*  */}
+
+        {/* observation results and progress loader */}
+        {obsvStatus === "loading" ? (
+          <div className={classes.progressLoaderSection}>
+            <ProgressLoader>
+              <Typography variant="h5" style={{ fontSize: "1.3rem" }}>
+                Loading Observations
+              </Typography>
+            </ProgressLoader>
           </div>
-          {/*  */}
-        </>
-      ) : null}
-      {/*  */}
+        ) : obsvStatus === "success" ? (
+          <>
+            <div className={classes.observationResults}>
+              {obsvData.results.map((observationData, index) => (
+                <ObservationCard
+                  observationData={observationData}
+                  maxMobileWidth={observationCardMaxMobileWidth}
+                  key={index}
+                ></ObservationCard>
+              ))}
+            </div>
+
+            {/* bottom results filter section */}
+            <div className={classes.dateAndPaginationSection}>
+              <DateFilter
+                dateViewValue={
+                  filterState[findFilterIndexInArray(filterState, "dateView")]
+                    .selected
+                }
+                handleDateViewValueChange={handleDateViewValueChange}
+              ></DateFilter>
+              <PaginationFilter
+                obsvStatus={obsvStatus}
+                obsvData={obsvData}
+                filterState={filterState}
+                handlePageChange={handlePageChange}
+                handleChangeRowsPerPage={handleChangeRowsPerPage}
+              ></PaginationFilter>
+            </div>
+            {/*  */}
+          </>
+        ) : null}
+        {/*  */}
+      </div>
     </div>
   );
 }
