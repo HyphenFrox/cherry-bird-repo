@@ -17,6 +17,7 @@ const observationCardMaxMobileWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   app: {
+    minHeight: "100%",
     padding: "1em 0",
     "& > * + *": {
       marginTop: "1em",
