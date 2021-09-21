@@ -6,7 +6,7 @@ import { useParams } from "react-router";
 import Carousel from "react-material-ui-carousel";
 
 //
-import GlobalProgressLoader from "../components/GlobalProgressLoader";
+import ProgressLoader from "../components/ProgressLoader";
 import fetchObservation from "../services/fetchObservation";
 import ObservationDetails from "../components/ObservationDetails";
 import UserDetails from "../components/UserDetails";
@@ -92,6 +92,12 @@ const useStyles = makeStyles((theme) => ({
         borderTop: "3px solid lightGray",
       },
     },
+  },
+  progressLoaderSection: {
+    minHeight: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   error: {
     width: "100vw",
@@ -207,9 +213,13 @@ function Test() {
 
   if (obsvStatus === "loading") {
     return (
-      <GlobalProgressLoader>
-        <Typography variant="h5">Loading Observation Data</Typography>
-      </GlobalProgressLoader>
+      <div className={classes.progressLoaderSection}>
+        <ProgressLoader>
+          <Typography variant="h5" style={{ fontSize: "1.5rem" }}>
+            Loading Observation Data
+          </Typography>
+        </ProgressLoader>
+      </div>
     );
   }
 

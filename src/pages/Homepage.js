@@ -1,8 +1,9 @@
-import { CircularProgress, makeStyles, Typography } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 
 //
+import ProgressLoader from "../components/ProgressLoader";
 import { filterDetails } from "../services/filterDetails";
 import Filters from "../components/Filters";
 import fetchObservations from "../services/fetchObservations";
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100%",
     padding: "1em 0",
     "& > *": {
-      margin: "0.8em",
+      margin: "1em",
     },
   },
   filterSection: {
@@ -40,13 +41,9 @@ const useStyles = makeStyles((theme) => ({
     gap: "1em",
   },
   progressLoaderSection: {
-    minHeight: 200,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    "& > * + *": {
-      marginLeft: "1em",
-    },
+    display: "grid",
+    gridTemplateColumns: "100%",
+    justifyItems: "center",
   },
   observationResults: {
     display: "flex",
@@ -188,39 +185,44 @@ function Homepage() {
       {/* observation results and progress loader */}
       {obsvStatus === "loading" ? (
         <div className={classes.progressLoaderSection}>
-          <CircularProgress></CircularProgress>
-          <Typography variant="h6">Loading Observations</Typography>
+          <ProgressLoader>
+            <Typography variant="h5" style={{ fontSize: "1.3rem" }}>
+              Loading Observations
+            </Typography>
+          </ProgressLoader>
         </div>
       ) : obsvStatus === "success" ? (
-        <div className={classes.observationResults}>
-          {obsvData.results.map((observationData, index) => (
-            <ObservationCard
-              observationData={observationData}
-              maxMobileWidth={observationCardMaxMobileWidth}
-              key={index}
-            ></ObservationCard>
-          ))}
-        </div>
-      ) : null}
-      {/*  */}
+        <>
+          <div className={classes.observationResults}>
+            {obsvData.results.map((observationData, index) => (
+              <ObservationCard
+                observationData={observationData}
+                maxMobileWidth={observationCardMaxMobileWidth}
+                key={index}
+              ></ObservationCard>
+            ))}
+          </div>
 
-      {/* bottom results filter section */}
-      <div className={classes.dateAndPaginationSection}>
-        <DateFilter
-          dateViewValue={
-            filterState[findFilterIndexInArray(filterState, "dateView")]
-              .selected
-          }
-          handleDateViewValueChange={handleDateViewValueChange}
-        ></DateFilter>
-        <PaginationFilter
-          obsvStatus={obsvStatus}
-          obsvData={obsvData}
-          filterState={filterState}
-          handlePageChange={handlePageChange}
-          handleChangeRowsPerPage={handleChangeRowsPerPage}
-        ></PaginationFilter>
-      </div>
+          {/* bottom results filter section */}
+          <div className={classes.dateAndPaginationSection}>
+            <DateFilter
+              dateViewValue={
+                filterState[findFilterIndexInArray(filterState, "dateView")]
+                  .selected
+              }
+              handleDateViewValueChange={handleDateViewValueChange}
+            ></DateFilter>
+            <PaginationFilter
+              obsvStatus={obsvStatus}
+              obsvData={obsvData}
+              filterState={filterState}
+              handlePageChange={handlePageChange}
+              handleChangeRowsPerPage={handleChangeRowsPerPage}
+            ></PaginationFilter>
+          </div>
+          {/*  */}
+        </>
+      ) : null}
       {/*  */}
     </div>
   );

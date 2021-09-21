@@ -1,21 +1,16 @@
+import React from "react";
 import { CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import React from "react";
 
 const useStyles = makeStyles({
   progressLoaderContainer: {
-    width: "100vw",
-    height: "100vh",
     display: "flex",
-    justifyContent: "center",
+    gap: "1em",
     alignItems: "center",
-    "& > * + *": {
-      marginLeft: "1em",
-    },
   },
 });
 
-function GlobalProgressLoader(props) {
+function ProgressLoader(props) {
   const { children, ...args } = props;
   const classes = useStyles();
   return (
@@ -26,4 +21,4 @@ function GlobalProgressLoader(props) {
   );
 }
 
-export default GlobalProgressLoader;
+export default ProgressLoader;
