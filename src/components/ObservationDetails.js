@@ -14,6 +14,8 @@ import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import LinkIcon from "@material-ui/icons/Link";
 import GoogleMapReact from "google-map-react";
+import { sanitize } from "dompurify";
+import HTMLReactParser from "html-react-parser";
 
 const useStyles = makeStyles({
   root: {
@@ -224,7 +226,9 @@ function ObservationDetails(props) {
           <Typography variant="h2" gutterBottom style={{ fontSize: "2rem" }}>
             Description
           </Typography>
-          <Typography>{observation?.taxon?.wikipedia_summary}</Typography>
+          <Typography>
+            {HTMLReactParser(sanitize(observation?.taxon?.wikipedia_summary))}
+          </Typography>
         </>
       ) : null}
     </div>
