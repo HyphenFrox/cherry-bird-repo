@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100%",
   },
   content: {
-    padding: "1em",
+    padding: "0 1em",
     "& > *": {
       margin: "1em",
     },
@@ -68,8 +68,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up(observationCardMaxMobileWidth + 1)]: {
       margin: "inherit",
       flexFlow: "row wrap",
-      paddingLeft: "5%",
-      paddingRight: "5%",
       alignItems: "initial",
       justifyContent: "center",
       "& > *": {
