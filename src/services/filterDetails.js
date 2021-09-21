@@ -23,6 +23,13 @@ const filterDetails = [
     options: ["Default", "Native", "Non-Native"],
   },
   {
+    filterName: "threatened",
+    filterFriendlyName: "Threatened",
+    elementType: "select",
+    selected: "",
+    options: ["Default", "Threatened", "Non-Threatened"],
+  },
+  {
     filterName: "popular",
     filterFriendlyName: "Popular",
     elementType: "select",
@@ -30,11 +37,11 @@ const filterDetails = [
     options: ["Default", "Popular", "Non-Popular"],
   },
   {
-    filterName: "threatened",
-    filterFriendlyName: "Threatened",
+    filterName: "photos",
+    filterFriendlyName: "With Photos",
     elementType: "select",
     selected: "",
-    options: ["Default", "Threatened", "Non-Threatened"],
+    options: ["Default", "true", "false"],
   },
   {
     filterName: "quality_grade",
