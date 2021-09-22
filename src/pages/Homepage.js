@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   header: {
-    height: "50px",
+    height: 50,
     padding: "2em",
     display: "flex",
     justifyContent: "flex-end",
@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   progressLoaderSection: {
-    minHeight: "200px",
+    minHeight: 200,
   },
 }));
 

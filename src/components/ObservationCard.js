@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   userIcon: {
-    width: "40px",
-    height: "40px",
+    width: 40,
+    height: 40,
     borderRadius: "50% 50%",
   },
   iconAndTextBox: {
