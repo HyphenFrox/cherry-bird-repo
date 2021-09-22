@@ -17,7 +17,12 @@ function DateFilter(props) {
   const { dateViewValue, handleDateViewValueChange, ...args } = props;
   const classes = useStyles();
   return (
-    <Tabs value={dateViewValue} onChange={handleDateViewValueChange} {...args}>
+    <Tabs
+      variant="scrollable"
+      value={dateViewValue}
+      onChange={handleDateViewValueChange}
+      {...args}
+    >
       {dateViewValueToLabel.map((filterViewName, index) => (
         <Tab
           key={index}
