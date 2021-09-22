@@ -12,6 +12,7 @@ import ObservationDetails from "../components/ObservationDetails";
 import UserDetails from "../components/UserDetails";
 import AppHeader from "../components/AppHeader";
 import useResponsiveSquare from "../services/useResponsiveSquare";
+import useFlexbox from "../services/useFlexbox";
 //
 
 const useStyles = makeStyles((theme) => ({
@@ -60,9 +61,6 @@ const useStyles = makeStyles((theme) => ({
   },
   progressLoader: {
     minHeight: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   },
   error: {
     width: "100vw",
@@ -95,6 +93,7 @@ function Test() {
 
   const classes = useStyles();
   const responsiveSquare = useResponsiveSquare();
+  const flexbox = useFlexbox();
 
   if (obsvStatus === "success") {
     const observation = obsvData.results[0];
@@ -191,7 +190,9 @@ function Test() {
 
   if (obsvStatus === "loading") {
     return (
-      <div className={classes.progressLoader}>
+      <div
+        className={classNames(flexbox.flexboxColumn, classes.progressLoader)}
+      >
         <ProgressLoader>
           <Typography variant="h5" style={{ fontSize: "1.5rem" }}>
             Loading Observation Data

@@ -1,20 +1,16 @@
 import React from "react";
 import { CircularProgress } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles({
-  progressLoaderContainer: {
-    display: "flex",
-    gap: "1em",
-    alignItems: "center",
-  },
-});
+//
+import useFlexbox from "../services/useFlexbox";
+//
 
 function ProgressLoader(props) {
   const { children, ...args } = props;
-  const classes = useStyles();
+  const flexbox = useFlexbox();
+
   return (
-    <div className={classes.progressLoaderContainer} {...args}>
+    <div className={flexbox.flexboxRow} {...args}>
       <CircularProgress></CircularProgress>
       {children}
     </div>
