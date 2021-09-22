@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles, Typography, Link } from "@material-ui/core";
 import { GitHub } from "@material-ui/icons";
 import { useQuery } from "react-query";
+import classNames from "classnames";
 
 //
 import ProgressLoader from "../components/ProgressLoader";
@@ -13,6 +14,7 @@ import ObservationCard from "../components/ObservationCard";
 import { dateViewLabelToValue } from "../services/dateViewConversion";
 import DateFilter from "../components/DateFilter";
 import PaginationFilter from "../components/PaginationFilter";
+import useFlexbox from "../services/useFlexbox";
 //
 
 const observationCardMaxMobileWidth = 300;
@@ -35,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   filterSection: {
-    display: "grid",
-    gridTemplateColumns: "100%",
-    justifyItems: "center",
     "& > *": {
       [theme.breakpoints.up("sm")]: {
         maxWidth: "75%",
@@ -49,11 +48,6 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     justifyContent: "center",
     gap: "1em",
-  },
-  progressLoaderSection: {
-    display: "grid",
-    gridTemplateColumns: "100%",
-    justifyItems: "center",
   },
   observationResults: {
     margin: 0,
@@ -74,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
         width: `${observationCardMaxMobileWidth}px`,
       },
     },
+  },
+  progressLoaderSection: {
+    minHeight: "200px",
   },
 }));
 
@@ -131,6 +128,7 @@ function Homepage() {
   //
 
   const classes = useStyles();
+  const flexbox = useFlexbox();
 
   return (
     <div className={classes.page}>
@@ -174,7 +172,9 @@ function Homepage() {
         {/*  */}
 
         {/* main filter section */}
-        <div className={classes.filterSection}>
+        <div
+          className={classNames(flexbox.flexboxColumn, classes.filterSection)}
+        >
           <Filters
             filterState={filterState}
             setFilterState={setFilterState}
@@ -204,7 +204,12 @@ function Homepage() {
 
         {/* observation results and progress loader */}
         {obsvStatus === "loading" ? (
-          <div className={classes.progressLoaderSection}>
+          <div
+            className={classNames(
+              flexbox.flexboxColumn,
+              classes.progressLoaderSection
+            )}
+          >
             <ProgressLoader>
               <Typography variant="h5" style={{ fontSize: "1.3rem" }}>
                 Loading Observations

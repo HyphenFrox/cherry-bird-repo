@@ -63,11 +63,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100%",
   },
   error: {
-    width: "100vw",
-    height: "100vh",
-    display: "grid",
-    gridTemplateColumns: "100%",
-    alignContent: "center",
+    minHeight: "100%",
   },
 }));
 function Test() {
@@ -204,7 +200,7 @@ function Test() {
 
   if (obsvStatus === "error") {
     return (
-      <div className={classes.error}>
+      <div className={classNames(flexbox.flexboxColumn, classes.error)}>
         <Typography align="center" variant="h5">
           Error fetching observation data: {obsvError.toString()}
         </Typography>

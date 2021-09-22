@@ -4,9 +4,11 @@ import { makeStyles } from "@material-ui/styles";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import SearchIcon from "@material-ui/icons/Search";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import classNames from "classnames";
 
 //
 import UserIcon from "./UserIcon";
+import useFlexbox from "../services/useFlexbox";
 //
 
 const useStyles = makeStyles({
@@ -26,9 +28,7 @@ const useStyles = makeStyles({
     gap: "1em",
   },
   userNameBox: {
-    display: "grid",
-    gridTemplateColumns: "100%",
-    alignContent: "center",
+    gap: "0.1em",
   },
   flexBox: {
     display: "flex",
@@ -45,11 +45,13 @@ const useStyles = makeStyles({
 function UserDetails(props) {
   const { userDetails, ...args } = props;
   const classes = useStyles();
+  const flexbox = useFlexbox();
+  
   return (
     <div className={classes.userDetailsColumn} {...args}>
       <div className={classes.userHeader}>
         <UserIcon userIconURL={userDetails?.icon_url ?? false}></UserIcon>
-        <div className={classes.userNameBox}>
+        <div className={classNames(flexbox.flexboxColumn, classes.userNameBox)}>
           <Typography className={classes.userFullName}>
             {userDetails?.name ?? "Unknown User"}
           </Typography>

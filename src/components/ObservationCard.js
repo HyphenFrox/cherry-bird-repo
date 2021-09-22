@@ -12,9 +12,11 @@ import CreateIcon from "@material-ui/icons/Create";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import PersonIcon from "@material-ui/icons/Person";
 import { useHistory } from "react-router-dom";
+import classNames from "classnames";
 
 //
 import useResponsiveSquare from "../services/useResponsiveSquare";
+import useFlexBox from "../services/useFlexbox";
 //
 
 const useStyles = makeStyles((theme) => ({
@@ -100,6 +102,7 @@ function ObservationCard(props) {
 
   const classes = useStyles({ maxMobileWidth });
   const responsiveSquare = useResponsiveSquare();
+  const flexbox = useFlexBox();
 
   return (
     <Card
@@ -116,12 +119,10 @@ function ObservationCard(props) {
         >
           {observationData?.observation_photos[0]?.photo?.url ? null : (
             <div
-              className={responsiveSquare.content}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "100%",
-                alignContent: "center",
-              }}
+              className={classNames(
+                responsiveSquare.content,
+                flexbox.flexboxColumn
+              )}
             >
               <Typography variant="subtitle2" align="center">
                 No Photo Available
