@@ -35,7 +35,7 @@ function UserIcon(props) {
 
   if (userIconURL) {
     return (
-      <div className={classNames(responsiveSquare.square)}>
+      <div className={responsiveSquare.square}>
         <div
           className={classNames(responsiveSquare.content, classes.userIconBG)}
           style={userIconStyles(userIconURL)}
