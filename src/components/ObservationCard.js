@@ -33,31 +33,18 @@ const useStyles = makeStyles((theme) => ({
       marginTop: "0.5em",
     },
   }),
+  obsvLocation: {
+    gap: "0.5em",
+    justifyContent: "flex-start",
+  },
   userAndTimeInfoBox: {
     marginTop: "0.5em",
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      margin: "0.25em",
-    },
+    justifyContent: "flex-start",
   },
   userIcon: {
     width: 40,
     height: 40,
     borderRadius: "50% 50%",
-  },
-  iconAndTextBox: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5em",
-  },
-  moreDetailsButton: {
-    marginLeft: "auto",
-    marginTop: "auto",
-    [theme.breakpoints.up("sm")]: {
-      marginTop: "initial",
-      marginRight: "auto",
-    },
   },
 }));
 
@@ -111,6 +98,7 @@ function ObservationCard(props) {
       {...args}
     >
       <CardContent>
+        {/* photo */}
         <div
           className={responsiveSquare.square}
           style={observationPhotoStyles(
@@ -130,15 +118,16 @@ function ObservationCard(props) {
             </div>
           )}
         </div>
-        <Typography
-          className={classes.observationCommonName}
-          variant="subtitle1"
-          style={{ marginTop: "1em" }}
-        >
+        {/*  */}
+
+        {/* common name */}
+        <Typography variant="subtitle1" style={{ marginTop: "1em" }}>
           {observationData?.taxon?.preferred_common_name ?? "Common Name N/A"}
         </Typography>
+        {/*  */}
+
+        {/* scientific name */}
         <Typography
-          className={classes.observationSpeciesName}
           variant="subtitle1"
           style={{
             fontSize: "0.9rem",
@@ -149,10 +138,12 @@ function ObservationCard(props) {
             observationData?.taxon?.iconic_taxon_name ?? "Unknown Kind"
           }`}
         </Typography>
-        <div className={classes.iconAndTextBox}>
+        {/*  */}
+
+        {/* location box */}
+        <div className={classNames(flexbox.flexboxRow, classes.obsvLocation)}>
           <LocationOnIcon></LocationOnIcon>
           <Typography
-            className={classes.observationLocation}
             variant="subtitle1"
             style={{
               fontSize: "0.85rem",
@@ -161,8 +152,17 @@ function ObservationCard(props) {
             {observationData?.place_guess ?? "Location N/A"}
           </Typography>
         </div>
-        <div className={classes.userAndTimeInfoBox}>
-          <div className={classes.iconAndTextBox}>
+        {/*  */}
+
+        {/* user and time info box */}
+        <div
+          className={classNames(
+            flexbox.flexboxRowWrap,
+            classes.userAndTimeInfoBox
+          )}
+        >
+          {/* user name */}
+          <div className={flexbox.flexboxRow} style={{ gap: "0.5em" }}>
             {observationData?.user?.icon_url ? (
               <div
                 className={classes.userIcon}
@@ -173,7 +173,6 @@ function ObservationCard(props) {
             )}
             <Typography
               variant="subtitle1"
-              className={classes.userName}
               style={{
                 fontSize: "1rem",
               }}
@@ -181,11 +180,13 @@ function ObservationCard(props) {
               {observationData?.user?.name ?? "Unknown Observer"}
             </Typography>
           </div>
-          <div className={classes.iconAndTextBox}>
+          {/*  */}
+
+          {/* observed on time */}
+          <div className={flexbox.flexboxRow}>
             <VisibilityIcon></VisibilityIcon>
             <Typography
               variant="subtitle1"
-              className={classes.observedOnTime}
               style={{
                 fontSize: "1rem",
               }}
@@ -195,11 +196,13 @@ function ObservationCard(props) {
                 : "Observation Date Unknown"}
             </Typography>
           </div>
-          <div className={classes.iconAndTextBox}>
+          {/*  */}
+
+          {/* created at time */}
+          <div className={flexbox.flexboxRow}>
             <CreateIcon></CreateIcon>
             <Typography
               variant="subtitle1"
-              className={classes.createdAtTime}
               style={{
                 fontSize: "1rem",
               }}
@@ -209,15 +212,22 @@ function ObservationCard(props) {
                 : "Creation Date Unknown"}
             </Typography>
           </div>
+          {/*  */}
+        </div>
+        {/*  */}
+
+        {/* more details button */}
+        <div
+          className={flexbox.flexboxRow}
+          style={{ justifyContent: "flex-end" }}
+        >
           {isMobile ? (
-            <Button
-              href={`/observations/${observationData.id}`}
-              className={classes.moreDetailsButton}
-            >
+            <Button href={`/observations/${observationData.id}`}>
               More Details
             </Button>
           ) : null}
         </div>
+        {/*  */}
       </CardContent>
     </Card>
   );

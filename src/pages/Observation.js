@@ -47,9 +47,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   obsvDetailsColumn: {
-    display: "flex",
-    flexFlow: "column nowrap",
     gap: "0.5em",
+    alignItems: "initial",
   },
   obsvPhoto: {
     "&:after": {
@@ -118,7 +117,13 @@ function Test() {
 
           {/* observation details grid */}
           <div className={classes.obsvDetailsGridBox}>
-            <div className={classes.obsvDetailsColumn}>
+            {/* observation details column */}
+            <div
+              className={classNames(
+                flexbox.flexboxColumn,
+                classes.obsvDetailsColumn
+              )}
+            >
               {obsvHasPhotos ? (
                 <Carousel autoPlay={false}>
                   {observation.observation_photos.map((photo_object, index) => {
@@ -155,7 +160,11 @@ function Test() {
                 observation={observation}
               ></ObservationDetails>
             </div>
+            {/*  */}
+
+            {/* user details column */}
             <UserDetails userDetails={observation.user}></UserDetails>
+            {/*  */}
           </div>
           {/*  */}
 

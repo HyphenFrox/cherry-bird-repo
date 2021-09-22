@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { makeStyles, Typography, Link } from "@material-ui/core";
+import {
+  makeStyles,
+  Typography,
+  Link,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 import { GitHub } from "@material-ui/icons";
 import { useQuery } from "react-query";
 import classNames from "classnames";
@@ -37,33 +43,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   filterSection: {
-    "& > *": {
-      [theme.breakpoints.up("sm")]: {
-        maxWidth: "75%",
-      },
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "75%",
     },
   },
-  dateAndPaginationSection: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: "1em",
-  },
   observationResults: {
-    margin: 0,
-    display: "flex",
-    flexFlow: "column nowrap",
-    gap: "1.5em",
-    alignItems: "center",
     "& > *": {
-      width: "100%",
       alignSelf: "flex-start",
     },
     [theme.breakpoints.up(observationCardMaxMobileWidth + 1)]: {
-      margin: "inherit",
-      flexFlow: "row wrap",
-      alignItems: "initial",
-      justifyContent: "center",
       "& > *": {
         width: `${observationCardMaxMobileWidth}px`,
       },
@@ -130,6 +118,11 @@ function Homepage() {
   const classes = useStyles();
   const flexbox = useFlexbox();
 
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(
+    theme.breakpoints.up(observationCardMaxMobileWidth + 1)
+  );
+
   return (
     <div className={classes.page}>
       {/* header */}
@@ -143,7 +136,7 @@ function Homepage() {
       </div>
       {/*  */}
 
-      <div className={classes.content}>
+      <div className={classNames(flexbox.flexboxColumn, classes.content)}>
         {/* Heading */}
         <Typography
           variant="h4"
@@ -172,9 +165,7 @@ function Homepage() {
         {/*  */}
 
         {/* main filter section */}
-        <div
-          className={classNames(flexbox.flexboxColumn, classes.filterSection)}
-        >
+        <div className={classes.filterSection}>
           <Filters
             filterState={filterState}
             setFilterState={setFilterState}
@@ -184,7 +175,7 @@ function Homepage() {
         {/*  */}
 
         {/* top results filter section */}
-        <div className={classes.dateAndPaginationSection}>
+        <div className={flexbox.flexboxRowWrap}>
           <DateFilter
             dateViewValue={
               filterState[findFilterIndexInArray(filterState, "dateView")]
@@ -218,7 +209,13 @@ function Homepage() {
           </div>
         ) : obsvStatus === "success" ? (
           <>
-            <div className={classes.observationResults}>
+            <div
+              className={classNames({
+                [flexbox.flexboxColumn]: !isDesktop,
+                [flexbox.flexboxRowWrap]: isDesktop,
+                [classes.observationResults]: true,
+              })}
+            >
               {obsvData.results.map((observationData, index) => (
                 <ObservationCard
                   observationData={observationData}
@@ -229,7 +226,7 @@ function Homepage() {
             </div>
 
             {/* bottom results filter section */}
-            <div className={classes.dateAndPaginationSection}>
+            <div className={flexbox.flexboxRowWrap}>
               <DateFilter
                 dateViewValue={
                   filterState[findFilterIndexInArray(filterState, "dateView")]

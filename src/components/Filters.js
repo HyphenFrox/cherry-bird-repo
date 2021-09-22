@@ -21,19 +21,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "1em",
     gap: "1em",
   },
-  select: {
-    minWidth: 120,
-  },
-  multiSelect: {
-    minWidth: 200,
-  },
-  location: {
-    minWidth: 200,
-  },
-  nearbyRadiusSlider: {
-    maxWidth: 200,
-    margin: "2em",
-  },
 }));
 
 function Filters({ filterDetails, filterState, setFilterState, ...args }) {
@@ -185,9 +172,6 @@ function Filters({ filterDetails, filterState, setFilterState, ...args }) {
       handleSelectFilterChange,
       handleMultiSelectFilterChange,
       handleLocationFilterValueChange,
-      selectClass: classes.select,
-      multiSelectClass: classes.multiSelect,
-      locationClass: classes.location,
       isLocationOptionsLoading,
       locationOptions,
     })
@@ -240,7 +224,10 @@ function Filters({ filterDetails, filterState, setFilterState, ...args }) {
                 min={1}
                 max={100}
                 marks={nearbyRadiusSliderMarks}
-                className={classes.nearbyRadiusSlider}
+                style={{
+                  maxWidth: 200,
+                  margin: "2em",
+                }}
               ></Slider>
             ) : null}
           </>

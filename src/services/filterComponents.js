@@ -31,9 +31,6 @@ export default function createFilterComponents({
   handleSelectFilterChange,
   handleMultiSelectFilterChange,
   handleLocationFilterValueChange,
-  selectClass,
-  multiSelectClass,
-  locationClass,
   isLocationOptionsLoading,
   locationOptions,
 }) {
@@ -44,7 +41,7 @@ export default function createFilterComponents({
   if (elementType === "select") {
     const inputLabelID = `${filterName}Label`;
     return (
-      <FormControl className={selectClass} key={index}>
+      <FormControl style={{ minWidth: 120 }} key={index}>
         <InputLabel id={inputLabelID}>{filterFriendlyName}</InputLabel>
         <Select
           labelId={inputLabelID}
@@ -98,7 +95,7 @@ export default function createFilterComponents({
         renderInput={(params) => (
           <TextField {...params} label={filterFriendlyName} />
         )}
-        className={multiSelectClass}
+        style={{ minWidth: 200 }}
       />
     );
   }
@@ -108,7 +105,7 @@ export default function createFilterComponents({
 
     return (
       <Autocomplete
-        className={locationClass}
+        style={{ minWidth: 200 }}
         disabled={
           filterState[findFilterIndexInArray(filterState, "isNearbyOn")]
             .selected

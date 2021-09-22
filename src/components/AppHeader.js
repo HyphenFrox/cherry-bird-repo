@@ -1,16 +1,8 @@
 import React from "react";
 import { AppBar, Link, Toolbar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 import { GitHub } from "@material-ui/icons";
 
-const useStyles = makeStyles({
-  spacer: {
-    flexGrow: 1,
-  },
-});
-
 function AppHeader() {
-  const classes = useStyles();
   return (
     <AppBar position="static" color="primary">
       <Toolbar>
@@ -22,7 +14,7 @@ function AppHeader() {
         >
           Cherry Bird Repo
         </Link>
-        <div className={classes.spacer}></div>
+        <div style={{ flexGrow: 1 }}></div>
         <Link
           href="https://github.com/HyphenFrox/cherry-bird-repo"
           target="_blank"

@@ -7,6 +7,13 @@ const useFlexbox = makeStyles({
     justifyContent: "center",
     alignItems: "center",
   },
+  flexboxRowWrap: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "1em",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   flexboxColumn: {
     display: "flex",
     flexDirection: "column",

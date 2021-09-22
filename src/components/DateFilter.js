@@ -4,7 +4,6 @@ import React from "react";
 //
 import { dateViewValueToLabel } from "../services/dateViewConversion";
 import capitalizeFirstLetterOfString from "../services/capitalizeFirstLetterOfString";
-
 //
 
 const useStyles = makeStyles((theme) => ({

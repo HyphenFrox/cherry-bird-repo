@@ -20,34 +20,10 @@ import classNames from "classnames";
 
 //
 import useResponsiveSquare from "../services/useResponsiveSquare";
+import useFlexbox from "../services/useFlexbox";
 //
 
 const useStyles = makeStyles({
-  obsvDetails: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1em",
-  },
-  flexBox: {
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      padding: "0.5em",
-    },
-  },
-  twoBox: {
-    display: "flex",
-    alignItems: "center",
-    "& > *:first-child": {
-      flexShrink: 0,
-    },
-    "& > *:nth-child(2)": {
-      flexGrow: 1,
-    },
-    "& > * + *": {
-      marginLeft: "0.5em",
-    },
-  },
   descriptionTitle: {
     fontSize: "2rem",
   },
@@ -55,11 +31,6 @@ const useStyles = makeStyles({
     "&:after": {
       paddingBottom: "50%",
     },
-  },
-  map: {
-    // position: "absolute",
-    // width: "100%",
-    // height: "100%",
   },
 });
 
@@ -71,78 +42,109 @@ function ObservationDetails(props) {
 
   const classes = useStyles();
   const responsiveSquare = useResponsiveSquare();
+  const flexbox = useFlexbox();
+
   return (
-    <div className={classes.obsvDetails} {...args}>
-      <div className={classes.flexBox}>
-        <div className={classes.twoBox}>
+    <div
+      className={flexbox.flexboxColumn}
+      style={{ alignItems: "initial" }}
+      {...args}
+    >
+      {/* short details with icons sections */}
+      <div
+        className={flexbox.flexboxRowWrap}
+        style={{ justifyContent: "initial" }}
+      >
+        {/* observation date */}
+        <div className={flexbox.flexboxRow}>
           <VisibilityIcon color="primary"></VisibilityIcon>
           <Typography variant="subtitle1">
             Observed on: {observedAt.toLocaleString()}
           </Typography>
         </div>
-        <div className={classes.twoBox}>
+        {/*  */}
+        {/* creation date */}
+        <div className={flexbox.flexboxRow}>
           <CreateIcon color="secondary"></CreateIcon>
           <Typography variant="subtitle1">
             Reported on: {createdAt.toLocaleString()}
           </Typography>
         </div>
-        <div className={classes.twoBox}>
+        {/*  */}
+        {/* quality grade */}
+        <div className={flexbox.flexboxRow}>
           <VerifiedUserIcon color="primary"></VerifiedUserIcon>
           <Typography variant="subtitle1">
             Observation Quality Grade: {observation?.quality_grade}
           </Typography>
         </div>
-        <div className={classes.twoBox}>
+        {/*  */}
+        {/* rank */}
+        <div className={flexbox.flexboxRow}>
           <PetsIcon color="secondary"></PetsIcon>
           <Typography>Rank: {observation?.taxon?.rank}</Typography>
         </div>
+        {/*  */}
+        {/* thretened */}
         {observation?.taxon?.threatened ? (
-          <div className={classes.twoBox}>
+          <div className={flexbox.flexboxRow}>
             <BlockIcon style={{ color: "#ff1744" }}></BlockIcon>
-            <Typography variant="subtitle1">
-              Endemic to their location
-            </Typography>
+            <Typography variant="subtitle1">Threatened</Typography>
           </div>
         ) : null}
+        {/*  */}
+        {/* extinct */}
         {observation?.taxon?.extinct ? (
-          <div className={classes.twoBox}>
+          <div className={flexbox.flexboxRow}>
             <BlockIcon style={{ color: "#ff1744" }}></BlockIcon>
             <Typography variant="subtitle1">They are extinct</Typography>
           </div>
         ) : null}
+        {/*  */}
+        {/* endemic */}
         {observation?.taxon?.endemic ? (
           <Typography variant="subtitle1">Endemic to their location</Typography>
         ) : null}
+        {/*  */}
+        {/* native */}
         {observation?.taxon?.native ? (
-          <div className={classes.twoBox}>
+          <div className={flexbox.flexboxRow}>
             <FiberManualRecordIcon></FiberManualRecordIcon>
             <Typography variant="subtitle1">
               Native to their location
             </Typography>
           </div>
         ) : null}
+        {/*  */}
+        {/* introduced */}
         {observation?.taxon?.introduced ? (
-          <div className={classes.twoBox}>
+          <div className={flexbox.flexboxRow}>
             <FiberManualRecordIcon></FiberManualRecordIcon>
             <Typography variant="subtitle1">
               Introduced to their location
             </Typography>
           </div>
         ) : null}
-        <div className={classes.twoBox}>
+        {/*  */}
+        {/* location */}
+        <div className={flexbox.flexboxRow}>
           <LocationOnIcon color="secondary"></LocationOnIcon>
           <Typography variant="subtitle1">
             Place Guess: {observation?.place_guess}
           </Typography>
         </div>
-        <div className={classes.twoBox}>
+        {/*  */}
+        {/* geolocation */}
+        <div className={flexbox.flexboxRow}>
           <GpsFixedIcon color="primary"></GpsFixedIcon>
           <Typography variant="subtitle1">
             Location Coordinates: {observation?.location}
           </Typography>
         </div>
+        {/*  */}
+        {/* geoprivacy */}
         {observation?.geoprivacy ? (
-          <div className={classes.twoBox}>
+          <div className={flexbox.flexboxRow}>
             <LocationDisabledIcon
               style={{ color: "#ff1744" }}
             ></LocationDisabledIcon>
@@ -151,8 +153,10 @@ function ObservationDetails(props) {
             </Typography>
           </div>
         ) : null}
+        {/*  */}
+        {/* taxon geoprivacy */}
         {observation?.taxon_geoprivacy ? (
-          <div className={classes.twoBox}>
+          <div className={flexbox.flexboxRow}>
             <LocationDisabledIcon
               style={{ color: "#ff1744" }}
             ></LocationDisabledIcon>
@@ -161,20 +165,26 @@ function ObservationDetails(props) {
             </Typography>
           </div>
         ) : null}
-        <div className={classes.twoBox}>
+        {/*  */}
+        {/* observation count */}
+        <div className={flexbox.flexboxRow}>
           <VisibilityIcon color="primary"></VisibilityIcon>
           <Typography variant="subtitle1">
             Observations Count: {observation?.taxon?.observations_count}
           </Typography>
         </div>
-        <div className={classes.twoBox}>
+        {/*  */}
+        {/* search rank */}
+        <div className={flexbox.flexboxRow}>
           <TrendingUpIcon color="secondary"></TrendingUpIcon>
           <Typography variant="subtitle1">
             Universal Search Rank: {observation?.taxon?.universal_search_rank}
           </Typography>
         </div>
+        {/*  */}
+        {/* wikipedia link */}
         {observation?.taxon?.wikipedia_url ? (
-          <div className={classes.twoBox}>
+          <div className={flexbox.flexboxRow}>
             <MenuBookIcon></MenuBookIcon>
             <Link
               href={observation?.taxon?.wikipedia_url}
@@ -185,20 +195,25 @@ function ObservationDetails(props) {
             </Link>
           </div>
         ) : null}
-        <div className={classes.twoBox}>
+        {/*  */}
+        {/* inaturalist link */}
+        <div className={flexbox.flexboxRow}>
           <LinkIcon color="primary"></LinkIcon>
           <Link href={observation?.uri} target="_blank" color="secondary">
             View on iNaturalist
           </Link>
         </div>
+        {/*  */}
       </div>
+      {/*  */}
+
       {isGeo ? (
         <>
           <Typography variant="h2" gutterBottom style={{ fontSize: "2rem" }}>
             Observation Location
           </Typography>
           <div className={classNames(responsiveSquare.square, classes.mapBox)}>
-            <div className={classNames(responsiveSquare.content, classes.map)}>
+            <div className={responsiveSquare.content}>
               <GoogleMapReact
                 bootstrapURLKeys={{
                   key: process.env.REACT_APP_googleMapsAPIKey,

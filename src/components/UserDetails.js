@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/styles";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import SearchIcon from "@material-ui/icons/Search";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
-import classNames from "classnames";
 
 //
 import UserIcon from "./UserIcon";
@@ -12,32 +11,15 @@ import useFlexbox from "../services/useFlexbox";
 //
 
 const useStyles = makeStyles({
-  userDetailsColumn: {
-    padding: "1em",
+  userDetails: {
     display: "flex",
     flexDirection: "column",
     gap: "1em",
-    "& > *": {
-      borderBottom: "3px solid lightgrey",
-    },
   },
   userHeader: {
     padding: "0.5em",
     display: "grid",
     gridTemplateColumns: "30% 70%",
-    gap: "1em",
-  },
-  userNameBox: {
-    gap: "0.1em",
-  },
-  flexBox: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "1em",
-  },
-  twoBox: {
-    display: "flex",
-    alignItems: "center",
     gap: "1em",
   },
 });
@@ -46,48 +28,63 @@ function UserDetails(props) {
   const { userDetails, ...args } = props;
   const classes = useStyles();
   const flexbox = useFlexbox();
-  
+
   return (
-    <div className={classes.userDetailsColumn} {...args}>
+    // user details box
+    <div className={classes.userDetails} {...args}>
+      {/* user header box */}
       <div className={classes.userHeader}>
+        {/* user photo */}
         <UserIcon userIconURL={userDetails?.icon_url ?? false}></UserIcon>
-        <div className={classNames(flexbox.flexboxColumn, classes.userNameBox)}>
-          <Typography className={classes.userFullName}>
-            {userDetails?.name ?? "Unknown User"}
-          </Typography>
+        {/*  */}
+
+        {/* uname box */}
+        <div
+          className={flexbox.flexboxColumn}
+          style={{ alignItems: "initial", gap: "0.3em" }}
+        >
+          <Typography>{userDetails?.name ?? "Unknown User"}</Typography>
           {userDetails?.login ? (
             <Typography>
               <Link
                 href={`https://inaturalist.org/people/${userDetails.login}`}
                 target="_blank"
                 color="secondary"
-                className={classes.userName}
               >{`@${userDetails?.login}`}</Link>
             </Typography>
           ) : null}
         </div>
+        {/*  */}
       </div>
-      <div className={classes.flexBox}>
-        <div className={classes.twoBox}>
+      {/*  */}
+
+      {/* user achievemnets section */}
+      <div
+        className={flexbox.flexboxRowWrap}
+        style={{ justifyContent: "initial" }}
+      >
+        <div className={flexbox.flexboxRow}>
           <VisibilityIcon color="primary"></VisibilityIcon>
           <Typography variant="subtitle1">
             {userDetails?.observations_count} Observations
           </Typography>
         </div>
-        <div className={classes.twoBox}>
+        <div className={flexbox.flexboxRow}>
           <SearchIcon color="secondary"></SearchIcon>
           <Typography variant="subtitle1">
             {userDetails?.identifications_count} Identifications
           </Typography>
         </div>
-        <div className={classes.twoBox}>
+        <div className={flexbox.flexboxRow}>
           <TrendingUpIcon color="primary"></TrendingUpIcon>
           <Typography variant="subtitle1">
             {userDetails?.universal_search_rank} Universal Search Rank
           </Typography>
         </div>
       </div>
+      {/*  */}
     </div>
+    //
   );
 }
 

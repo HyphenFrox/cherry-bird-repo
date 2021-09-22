@@ -11,9 +11,6 @@ const useStyles = makeStyles({
   userIconBG: {
     borderRadius: "50% 50%",
   },
-  defaultUserIcon: {
-    margin: "auto",
-  },
 });
 
 function UserIcon(props) {
@@ -44,7 +41,14 @@ function UserIcon(props) {
     );
   }
 
-  return <PersonIcon className={classes.defaultUserIcon}></PersonIcon>;
+  return (
+    <PersonIcon
+      className={classes.defaultUserIcon}
+      style={{
+        margin: "auto",
+      }}
+    ></PersonIcon>
+  );
 }
 
 export default UserIcon;
