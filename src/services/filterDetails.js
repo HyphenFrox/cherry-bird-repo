@@ -41,7 +41,7 @@ const filterDetails = [
     filterFriendlyName: "With Photos",
     elementType: "select",
     selected: "",
-    options: ["Default", "true", "false"],
+    options: ["Default", "True", "False"],
   },
   {
     filterName: "quality_grade",
