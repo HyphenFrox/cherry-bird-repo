@@ -11,8 +11,8 @@ import fetchObservation from "../services/fetchObservation";
 import ObservationDetails from "../components/ObservationDetails";
 import UserDetails from "../components/UserDetails";
 import AppHeader from "../components/AppHeader";
-import useResponsiveSquare from "../services/useResponsiveSquare";
-import useFlexbox from "../services/useFlexbox";
+import getResponsiveSquare from "../services/getResponsiveSquare";
+import getFlexbox from "../services/getFlexbox";
 //
 
 const useStyles = makeStyles((theme) => ({
@@ -87,8 +87,8 @@ function Test() {
   };
 
   const classes = useStyles();
-  const responsiveSquare = useResponsiveSquare();
-  const flexbox = useFlexbox();
+  const responsiveSquare = getResponsiveSquare();
+  const flexbox = getFlexbox();
 
   if (obsvStatus === "success") {
     const observation = obsvData.results[0];

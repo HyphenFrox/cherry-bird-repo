@@ -22,8 +22,8 @@ import LinkIcon from "@material-ui/icons/Link";
 //
 
 //
-import useResponsiveSquare from "../services/useResponsiveSquare";
-import useFlexbox from "../services/useFlexbox";
+import getResponsiveSquare from "../services/getResponsiveSquare";
+import getFlexbox from "../services/getFlexbox";
 //
 
 const useStyles = makeStyles({
@@ -44,8 +44,8 @@ function ObservationDetails(props) {
   const isGeo = observation.hasOwnProperty("geojson");
 
   const classes = useStyles();
-  const responsiveSquare = useResponsiveSquare();
-  const flexbox = useFlexbox();
+  const responsiveSquare = getResponsiveSquare();
+  const flexbox = getFlexbox();
 
   return (
     <div

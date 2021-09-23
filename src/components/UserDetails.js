@@ -1,13 +1,15 @@
 import React from "react";
-import { Link, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { Link, Typography, makeStyles } from "@material-ui/core";
+
+// icons
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import SearchIcon from "@material-ui/icons/Search";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+//
 
 //
 import UserIcon from "./UserIcon";
-import useFlexbox from "../services/useFlexbox";
+import getFlexbox from "../services/getFlexbox";
 //
 
 const useStyles = makeStyles({
@@ -27,7 +29,7 @@ const useStyles = makeStyles({
 function UserDetails(props) {
   const { userDetails, ...args } = props;
   const classes = useStyles();
-  const flexbox = useFlexbox();
+  const flexbox = getFlexbox();
 
   return (
     // user details box

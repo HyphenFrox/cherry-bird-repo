@@ -8,16 +8,19 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import classNames from "classnames";
+
+// icons
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import CreateIcon from "@material-ui/icons/Create";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import PersonIcon from "@material-ui/icons/Person";
-import { useHistory } from "react-router-dom";
-import classNames from "classnames";
+//
 
 //
-import useResponsiveSquare from "../services/useResponsiveSquare";
-import useFlexBox from "../services/useFlexbox";
+import getResponsiveSquare from "../services/getResponsiveSquare";
+import useFlexBox from "../services/getFlexbox";
 //
 
 const useStyles = makeStyles((theme) => ({
@@ -90,7 +93,7 @@ function ObservationCard(props) {
   //
 
   const classes = useStyles({ isDesktop });
-  const responsiveSquare = useResponsiveSquare();
+  const responsiveSquare = getResponsiveSquare();
   const flexbox = useFlexBox();
 
   return (

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const useFlexbox = makeStyles({
+const getFlexbox = makeStyles({
   flexboxRow: {
     display: "flex",
     gap: "1em",
@@ -23,4 +23,4 @@ const useFlexbox = makeStyles({
   },
 });
 
-export default useFlexbox;
+export default getFlexbox;

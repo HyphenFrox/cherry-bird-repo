@@ -1,7 +1,6 @@
 import React from "react";
-import { CssBaseline, createTheme } from "@material-ui/core";
+import { CssBaseline, createTheme, ThemeProvider } from "@material-ui/core";
 import { green, lightBlue } from "@material-ui/core/colors";
-import { ThemeProvider } from "@material-ui/styles";
 
 function Theme({ children }) {
   const appTheme = createTheme({

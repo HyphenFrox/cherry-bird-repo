@@ -1,10 +1,10 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
-import { makeStyles } from "@material-ui/styles";
 import classNames from "classnames";
 
 //
-import useResponsiveSquare from "../services/useResponsiveSquare";
+import getResponsiveSquare from "../services/getResponsiveSquare";
 //
 
 const useStyles = makeStyles({
@@ -32,7 +32,7 @@ function UserIcon(props) {
   };
 
   const classes = useStyles();
-  const responsiveSquare = useResponsiveSquare();
+  const responsiveSquare = getResponsiveSquare();
 
   if (userIconURL) {
     return (

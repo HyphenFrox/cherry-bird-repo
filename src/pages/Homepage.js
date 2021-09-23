@@ -14,7 +14,7 @@ import ObservationCard from "../components/ObservationCard";
 import { dateViewLabelToValue } from "../services/dateViewConversion";
 import DateFilter from "../components/DateFilter";
 import PaginationFilter from "../components/PaginationFilter";
-import useFlexbox from "../services/useFlexbox";
+import getFlexbox from "../services/getFlexbox";
 //
 
 const observationCardMaxWidth = 300;
@@ -107,7 +107,7 @@ function Homepage() {
   //
 
   const classes = useStyles();
-  const flexbox = useFlexbox();
+  const flexbox = getFlexbox();
 
   return (
     <div className={classes.page}>

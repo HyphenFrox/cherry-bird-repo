@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const useResponsiveSquare = makeStyles({
+const getResponsiveSquare = makeStyles({
   square: {
     width: "100%",
     position: "relative",
@@ -19,4 +19,4 @@ const useResponsiveSquare = makeStyles({
   },
 });
 
-export default useResponsiveSquare;
+export default getResponsiveSquare;

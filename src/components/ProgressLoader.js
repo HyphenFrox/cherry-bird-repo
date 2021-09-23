@@ -2,12 +2,12 @@ import React from "react";
 import { CircularProgress } from "@material-ui/core";
 
 //
-import useFlexbox from "../services/useFlexbox";
+import getFlexbox from "../services/getFlexbox";
 //
 
 function ProgressLoader(props) {
   const { children, ...args } = props;
-  const flexbox = useFlexbox();
+  const flexbox = getFlexbox();
 
   return (
     <div className={flexbox.flexboxRow} {...args}>
