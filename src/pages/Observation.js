@@ -199,7 +199,11 @@ function Test() {
         className={classNames(flexbox.flexboxColumn, classes.progressLoader)}
       >
         <ProgressLoader>
-          <Typography variant="h5" style={{ fontSize: "1.5rem" }}>
+          <Typography
+            variant="h5"
+            align="center"
+            style={{ fontSize: "1.5rem" }}
+          >
             Loading Observation Data
           </Typography>
         </ProgressLoader>
