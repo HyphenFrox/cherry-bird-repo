@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100%",
   },
   content: {
+    justifyContent: "initial",
     padding: "0 1em",
     "& > *": {
       margin: "1em",

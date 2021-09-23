@@ -1,24 +1,9 @@
 import React from "react";
-import { makeStyles, Paper, TablePagination } from "@material-ui/core";
+import { Paper, TablePagination } from "@material-ui/core";
 
 //
 import findFilterIndexInArray from "../services/findFilterIndexInArray";
 //
-
-const useStyles = makeStyles((theme) => ({
-  pagination: {
-    maxWidth: "90%",
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "75%",
-    },
-    [theme.breakpoints.up("md")]: {
-      maxWidth: "50%",
-    },
-    [theme.breakpoints.up("lg")]: {
-      maxWidth: "40%",
-    },
-  },
-}));
 
 function PaginationFilter(props) {
   const {
@@ -30,11 +15,9 @@ function PaginationFilter(props) {
     ...args
   } = props;
 
-  const classes = useStyles();
-
   if (obsvStatus === "success") {
     return (
-      <Paper className={classes.pagination} {...args}>
+      <Paper {...args}>
         <TablePagination
           component="div"
           count={obsvData.total_results}
