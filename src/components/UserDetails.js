@@ -62,8 +62,8 @@ function UserDetails(props) {
 
       {/* user achievemnets section */}
       <div
-        className={flexbox.flexboxRowWrap}
-        style={{ justifyContent: "initial" }}
+        className={flexbox.flexboxColumn}
+        style={{ justifyContent: "initial", alignItems: "flex-start" }}
       >
         <div className={flexbox.flexboxRow} style={{ gap: "0.5em" }}>
           <VisibilityIcon color="primary"></VisibilityIcon>
