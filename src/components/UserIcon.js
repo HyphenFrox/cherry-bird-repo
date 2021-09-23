@@ -8,8 +8,12 @@ import useResponsiveSquare from "../services/useResponsiveSquare";
 //
 
 const useStyles = makeStyles({
-  userIconBG: {
+  userIcon: {
+    maxWidth: "60px",
     borderRadius: "50% 50%",
+  },
+  defaultUserIcon: {
+    maxWidth: "50px",
   },
 });
 
@@ -32,12 +36,10 @@ function UserIcon(props) {
 
   if (userIconURL) {
     return (
-      <div className={responsiveSquare.square}>
-        <div
-          className={classNames(responsiveSquare.content, classes.userIconBG)}
-          style={userIconStyles(userIconURL)}
-        ></div>
-      </div>
+      <div
+        className={classNames(responsiveSquare.square, classes.userIcon)}
+        style={{ ...userIconStyles(userIconURL), margin: "auto" }}
+      ></div>
     );
   }
 
