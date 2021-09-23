@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   obsvDetailsGridBox: {
     display: "grid",
     gridTemplateColumns: "2fr 1fr",
-    gap: "1em",
+    gap: "2em",
     "@media screen and (max-aspect-ratio: 1/1)": {
       gridTemplateColumns: "100%",
     },
