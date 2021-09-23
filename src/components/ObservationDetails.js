@@ -1,5 +1,11 @@
 import React from "react";
 import { Link, Typography } from "@material-ui/core";
+import GoogleMapReact from "google-map-react";
+import { sanitize } from "dompurify";
+import HTMLReactParser from "html-react-parser";
+import classNames from "classnames";
+
+// icons
 import { makeStyles } from "@material-ui/styles";
 import CreateIcon from "@material-ui/icons/Create";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
@@ -13,10 +19,7 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import LinkIcon from "@material-ui/icons/Link";
-import GoogleMapReact from "google-map-react";
-import { sanitize } from "dompurify";
-import HTMLReactParser from "html-react-parser";
-import classNames from "classnames";
+//
 
 //
 import useResponsiveSquare from "../services/useResponsiveSquare";
