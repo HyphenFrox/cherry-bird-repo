@@ -18,12 +18,6 @@ const useStyles = makeStyles({
     flexDirection: "column",
     gap: "1em",
   },
-  userHeader: {
-    padding: "0.5em",
-    display: "grid",
-    gridTemplateColumns: "30% 70%",
-    gap: "1em",
-  },
 });
 
 function UserDetails(props) {
@@ -35,7 +29,10 @@ function UserDetails(props) {
     // user details box
     <div className={classes.userDetails} {...args}>
       {/* user header box */}
-      <div className={classes.userHeader}>
+      <div
+        className={flexbox.flexboxRow}
+        style={{ justifyContent: "flex-start" }}
+      >
         {/* user photo */}
         <UserIcon userIconURL={userDetails?.icon_url ?? false}></UserIcon>
         {/*  */}

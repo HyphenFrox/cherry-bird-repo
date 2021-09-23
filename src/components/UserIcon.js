@@ -38,19 +38,12 @@ function UserIcon(props) {
     return (
       <div
         className={classNames(responsiveSquare.square, classes.userIcon)}
-        style={{ ...userIconStyles(userIconURL), margin: "auto" }}
+        style={{ ...userIconStyles(userIconURL) }}
       ></div>
     );
   }
 
-  return (
-    <PersonIcon
-      className={classes.defaultUserIcon}
-      style={{
-        margin: "auto",
-      }}
-    ></PersonIcon>
-  );
+  return <PersonIcon className={classes.defaultUserIcon}></PersonIcon>;
 }
 
 export default UserIcon;
