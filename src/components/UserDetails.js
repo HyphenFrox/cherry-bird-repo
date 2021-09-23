@@ -14,6 +14,11 @@ import getFlexbox from "../services/getFlexbox";
 
 const useStyles = makeStyles({
   userDetails: {
+    alignSelf: "flex-start",
+    borderTop: "3px solid lightGrey",
+    borderBottom: "3px solid lightGrey",
+    paddingTop: "1em",
+    paddingBottom: "1em",
     display: "flex",
     flexDirection: "column",
     gap: "1em",
