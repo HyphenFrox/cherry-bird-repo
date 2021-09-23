@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  makeStyles,
-  Typography,
-  Link,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core";
+import { makeStyles, Typography, Link } from "@material-ui/core";
 import { GitHub } from "@material-ui/icons";
 import { useQuery } from "react-query";
 import classNames from "classnames";
@@ -23,7 +17,7 @@ import PaginationFilter from "../components/PaginationFilter";
 import useFlexbox from "../services/useFlexbox";
 //
 
-const observationCardMaxMobileWidth = 300;
+const observationCardMaxWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -51,11 +45,7 @@ const useStyles = makeStyles((theme) => ({
   observationResults: {
     "& > *": {
       alignSelf: "flex-start",
-    },
-    [theme.breakpoints.up(observationCardMaxMobileWidth + 1)]: {
-      "& > *": {
-        width: `${observationCardMaxMobileWidth}px`,
-      },
+      maxWidth: observationCardMaxWidth,
     },
   },
   progressLoaderSection: {
@@ -118,11 +108,6 @@ function Homepage() {
 
   const classes = useStyles();
   const flexbox = useFlexbox();
-
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(
-    theme.breakpoints.up(observationCardMaxMobileWidth + 1)
-  );
 
   return (
     <div className={classes.page}>
@@ -211,16 +196,14 @@ function Homepage() {
         ) : obsvStatus === "success" ? (
           <>
             <div
-              className={classNames({
-                [flexbox.flexboxColumn]: !isDesktop,
-                [flexbox.flexboxRowWrap]: isDesktop,
-                [classes.observationResults]: true,
-              })}
+              className={classNames(
+                flexbox.flexboxRowWrap,
+                classes.observationResults
+              )}
             >
               {obsvData.results.map((observationData, index) => (
                 <ObservationCard
                   observationData={observationData}
-                  maxMobileWidth={observationCardMaxMobileWidth}
                   key={index}
                 ></ObservationCard>
               ))}

@@ -6,6 +6,7 @@ import {
   makeStyles,
   Typography,
   useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import CreateIcon from "@material-ui/icons/Create";
@@ -23,10 +24,10 @@ const useStyles = makeStyles((theme) => ({
   observationCard: (props) => ({
     backgroundColor: "hsla(144, 100%, 50%, 0.3)",
     boxShadow: theme.shadows[4],
-    [theme.breakpoints.up(props.maxMobileWidth + 1)]: {
+    [theme.breakpoints.up("sm")]: {
       cursor: "pointer",
       "&:hover": {
-        boxShadow: theme.shadows[10],
+        boxShadow: props.isDesktop ? theme.shadows[10] : "initial",
       },
     },
     "& > *": {
@@ -49,13 +50,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ObservationCard(props) {
-  const { observationData, maxMobileWidth, ...args } = props;
+  const { observationData, ...args } = props;
 
   const created_at = new Date(observationData?.created_at);
   const time_observed_at = new Date(observationData?.time_observed_at);
 
   //for more details button
-  const isMobile = useMediaQuery(`(max-width:${maxMobileWidth - 1}px)`);
+  const appTheme = useTheme();
+  const isDesktop = useMediaQuery(appTheme.breakpoints.up("sm"));
   const history = useHistory();
   const handleCardClick = (observationID) => () =>
     history.push(`/observation/${observationID}`);
@@ -87,14 +89,14 @@ function ObservationCard(props) {
   };
   //
 
-  const classes = useStyles({ maxMobileWidth });
+  const classes = useStyles({ isDesktop });
   const responsiveSquare = useResponsiveSquare();
   const flexbox = useFlexBox();
 
   return (
     <Card
       className={classes.observationCard}
-      onClick={!isMobile ? handleCardClick(observationData.id) : null}
+      onClick={isDesktop ? handleCardClick(observationData.id) : null}
       {...args}
     >
       <CardContent>
@@ -221,11 +223,11 @@ function ObservationCard(props) {
           className={flexbox.flexboxRow}
           style={{ justifyContent: "flex-end" }}
         >
-          {isMobile ? (
+          {isDesktop ? null : (
             <Button href={`/observations/${observationData.id}`}>
               More Details
             </Button>
-          ) : null}
+          )}
         </div>
         {/*  */}
       </CardContent>
