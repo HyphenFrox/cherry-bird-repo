@@ -65,19 +65,19 @@ function UserDetails(props) {
         className={flexbox.flexboxRowWrap}
         style={{ justifyContent: "initial" }}
       >
-        <div className={flexbox.flexboxRow}>
+        <div className={flexbox.flexboxRow} style={{ gap: "0.5em" }}>
           <VisibilityIcon color="primary"></VisibilityIcon>
           <Typography variant="subtitle1">
             {userDetails?.observations_count} Observations
           </Typography>
         </div>
-        <div className={flexbox.flexboxRow}>
+        <div className={flexbox.flexboxRow} style={{ gap: "0.5em" }}>
           <SearchIcon color="secondary"></SearchIcon>
           <Typography variant="subtitle1">
             {userDetails?.identifications_count} Identifications
           </Typography>
         </div>
-        <div className={flexbox.flexboxRow}>
+        <div className={flexbox.flexboxRow} style={{ gap: "0.5em" }}>
           <TrendingUpIcon color="primary"></TrendingUpIcon>
           <Typography variant="subtitle1">
             {userDetails?.universal_search_rank} Universal Search Rank
