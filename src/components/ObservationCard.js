@@ -24,19 +24,19 @@ import useFlexBox from "../services/getFlexbox";
 //
 
 const useStyles = makeStyles((theme) => ({
-  observationCard: (props) => ({
+  observationCard: {
     backgroundColor: "hsla(144, 100%, 50%, 0.3)",
     boxShadow: theme.shadows[4],
     [theme.breakpoints.up("sm")]: {
       cursor: "pointer",
       "&:hover": {
-        boxShadow: props.isDesktop ? theme.shadows[10] : "initial",
+        boxShadow: theme.shadows[10],
       },
     },
     "& > *": {
       marginTop: "0.5em",
     },
-  }),
+  },
   obsvLocation: {
     gap: "0.5em",
     justifyContent: "flex-start",
