@@ -14,4 +14,6 @@ Cherry Bird Repo is a wildlife observation repository that displays all the wild
 - [React.js](https://reactjs.org/)
 - [Material UI](https://mui.com/)
 
-Please note that this is just a personal project of mine. If you have any suggestions or problems with the app. You can contact me on [Twitter](http://twiter.com/HyphenFrox).
+# About this project
+
+This is just a personal project of mine. You can contact me on my Twitter [@HyphenFrox](http://twiter.com/HyphenFrox).
