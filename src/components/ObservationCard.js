@@ -99,7 +99,7 @@ function ObservationCard(props) {
   return (
     <Card
       className={classes.observationCard}
-      onClick={isDesktop ? handleCardClick(observationData.id) : null}
+      onClick={handleCardClick(observationData.id)}
       {...args}
     >
       <CardContent>
