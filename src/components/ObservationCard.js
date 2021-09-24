@@ -8,7 +8,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link as RouterLink } from "react-router-dom";
 import classNames from "classnames";
 
 // icons
@@ -227,7 +227,10 @@ function ObservationCard(props) {
           style={{ justifyContent: "flex-end" }}
         >
           {isDesktop ? null : (
-            <Button href={`/observations/${observationData.id}`}>
+            <Button
+              component={RouterLink}
+              to={`/observation/${observationData.id}`}
+            >
               More Details
             </Button>
           )}
