@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   observationResults: {
+    gap: "2em",
     "& > *": {
       alignSelf: "flex-start",
       maxWidth: observationCardMaxWidth,
