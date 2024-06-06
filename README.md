@@ -16,4 +16,4 @@ Cherry Bird Repo is a wildlife observation repository that displays all the wild
 
 # About this project
 
-This is just a personal project of mine. You can contact me on my Twitter [@HyphenFrox](http://twiter.com/HyphenFrox).
+This is just a personal project of mine. You can contact me on my Twitter [@HyphenFrox](http://twitter.com/HyphenFrox).
